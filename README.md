@@ -68,7 +68,7 @@ sambhava-validation-portfolio/
 This work follows **GAMP 5 Appendix M3** (retrospective validation for legacy systems) combined with modern context engineering practices.
 
 **Key characteristics:**
-- Brownfield validation (documenting as-built systems)
+- Retrospective validation (documenting as-built systems)
 - AI-assisted investigation and documentation
 - Human verification and approval at all decision points
 - Full requirements traceability (URS → FRS → DS → OQ)
@@ -109,7 +109,7 @@ The `01_Login/` folder demonstrates the complete validation workflow:
 - Methodology for verifying AI-assisted investigation outputs
 
 **This package demonstrates:**
-- Systematic brownfield validation approach
+- Systematic retrospective validation approach
 - AI-assisted documentation with human verification
 - Complete traceability structure (URS → FRS → DS → OQ)
 - Context-aware validation methodology
