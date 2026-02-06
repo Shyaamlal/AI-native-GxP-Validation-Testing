@@ -92,59 +92,6 @@ AI is used as a **GAMP 5 Category 1 authoring tool**:
 
 ---
 
-## Current Work
-
-This repository contains a working validation methodology applied to the Sambhava application.
-
-### Login Feature - Foundation Established
-
-The `01_Login/` folder demonstrates the complete validation workflow:
-
-**Completed:**
-- Feature observation and boundary definition
-- Requirements documentation (URS, FRS, DS)
-- Test protocol development (OQ with 8 test cases)
-- Full requirements traceability (100% coverage)
-- Methodology for verifying AI-assisted investigation outputs
-
-**This package demonstrates:**
-- Systematic retrospective validation approach
-- AI-assisted documentation with human verification
-- Complete traceability structure (URS → FRS → DS → OQ)
-- Context-aware validation methodology
-
-### Next Features
-
-Additional features will follow the same systematic approach:
-- Client Creation
-- Assessment Upload
-- Assessment Processing Status
-- Results Viewing
-- Report Generation
-
-Each feature will demonstrate refinement and acceleration of the methodology as patterns and context accumulate.
-
----
-
-## Key Learnings
-
-### Brownfield Validation
-- Retrospective requirements creation requires systematic verification
-- AI investigation must be validated through manual testing
-- Three-layer verification: commission errors, omission errors, scope accuracy
-
-### Context Engineering
-- Application context document is critical for AI accuracy
-- Skills-based knowledge accumulation improves quality over time
-- Centralized context management enables consistent validation
-
-### Traceability
-- Feature-level packages enable independent validation
-- Cross-feature traceability requires centralized management
-- Bi-directional traceability (URS ↔ FRS ↔ DS ↔ OQ) is essential
-
----
-
 ## Context Management Approach
 
 This repository implements **context-native validation**, where AI tools operate with comprehensive application and domain knowledge rather than generic prompts.
@@ -156,25 +103,6 @@ This repository implements **context-native validation**, where AI tools operate
 4. **Feature Context** - Specific validation artifacts
 
 This approach aligns with emerging industry practices for AI-assisted development (see: GitHub Copilot Spaces, Microsoft WorkIQ, DataHub context management).
-
----
-
-## Example: Login Feature Validation
-
-The `01_Login/` folder demonstrates validation documentation readiness:
-
-**Observation → Investigation → Requirements → Test Planning**
-
-1. **Feature Observation** - Black-box functional testing and behavioral documentation
-2. **Boundary Definition** - Scope determination with clear rationale
-3. **Verification Report** - AI investigation accuracy validated through manual testing
-4. **Design Specification (DS)** - As-built implementation documented
-5. **Functional Requirements (FRS)** - System behavior specified (15 requirements)
-6. **User Requirements (URS)** - Business needs documented (5 requirements)
-7. **OQ Protocol** - Test cases created with full traceability (8 test cases, 100% coverage)
-8. **Validation Summary** - Package overview prepared
-
-**Result:** Audit-ready validation package structure with complete traceability and systematic workflow demonstrated.
 
 ---
 
@@ -240,36 +168,6 @@ This repository documents an active exploration. Feedback, questions, and discus
 This methodology documentation is shared for educational and professional reference purposes.
 
 **Code and validation artifacts:** Demonstration purposes only. Not for production use without proper qualification and validation.
-
----
-
-## Acknowledgments
-
-**Regulatory Standards:**
-- GAMP 5 (ISPE) - Good Automated Manufacturing Practice
-- IEC 62304 - Medical device software lifecycle processes
-- 21 CFR Part 11 (FDA) - Electronic records and signatures
-
-**Industry Practices:**
-- Context engineering approaches from GitHub, Microsoft, DataHub
-- Brownfield validation methodologies from GAMP 5 Appendix M3
-
----
-
-## Repository Maintenance
-
-**Maintained by:** [@Shyaamlal](https://github.com/Shyaamlal)
-
-**Last Updated:** February 2026
-
-**Status:** Active development - additional features being validated
-
----
-
-## Contact & Discussion
-
-- **Issues:** Use GitHub Issues for questions or methodology discussion
-- **Repository:** [github.com/Shyaamlal/sambhava-validation-portfolio](https://github.com/Shyaamlal/sambhava-validation-portfolio)
 
 ---
 
