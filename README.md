@@ -1,10 +1,10 @@
-# Context-Native AI Validation Framework
+# Context-Native AI for GxP Software Validation
 
-**Project:** Practical exploration of systematic validation workflows for regulated industries using modern AI tooling, while maintaining compliance with GAMP 5, IEC 62304, and 21 CFR Part 11.
+**Project:** Practical exploration of systematic software validation workflows for regulated life sciences environments, using modern AI tooling while maintaining compliance with GAMP 5 and IEC 62304.
 
 **Objective:** Document reproducible, feature-level validation workflows that use AI to accelerate analysis and documentation, with clear human oversight and regulatory accountability.
 
-**Status:** Active development. Login feature validation package completed; additional features in progress.
+**Status:** Active development.
 
 ---
 
@@ -76,7 +76,6 @@ This work follows **GAMP 5 Appendix M3** (retrospective validation for legacy sy
 ### Regulatory Standards
 - **GAMP 5:** Risk-based approach to GxP compliance
 - **IEC 62304:** Software lifecycle requirements and traceability
-- **21 CFR Part 11:** Electronic records and signatures (where applicable)
 
 ### AI Tool Usage
 AI is used as a **GAMP 5 Category 1 authoring tool**:

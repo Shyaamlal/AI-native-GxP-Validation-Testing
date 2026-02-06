@@ -228,9 +228,9 @@ Before moving to next validation phase:
 - No untraceable test cases
 
 ✅ **AI outputs verified by manual testing**
-- All investigation findings validated
-- Commission, omission, and scope accuracy confirmed
-- Ground truth established before documentation
+- Commission errors: Specific AI claims tested and confirmed
+- Omission errors: Completeness verified through [full inventory | filtered search | sampling]
+- Verification method and confidence level documented in Verification Report
 
 ✅ **Scope boundaries documented with rationale**
 - IN/OUT scope clearly defined
@@ -241,6 +241,14 @@ Before moving to next validation phase:
 - All decisions traceable to requirements or observations
 - Context files enable regeneration of documentation
 - Methodology and rationale clearly documented
+
+✅ **Test execution complete with evidence (for "Validated" status)**
+- OQ Protocol exists
+- Tests executed by qualified tester (with date)
+- Results documented (pass/fail for each test case)
+- Evidence captured (screenshots/notes/observations)
+- Deviations documented (if any failures/anomalies)
+Note: This gate distinguishes "Documentation Complete" from "Validation Complete"
 
 ---
 
@@ -592,5 +600,7 @@ This methodology is a living document. It evolves based on:
 - Domain expertise accumulates over time
 
 ---
+
+Note: Thread summaries document intentions and learnings. Verification reports document what was actually verified. When in doubt, verification report is source of truth.
 
 *This methodology balances regulatory compliance with practical efficiency. It leverages AI capabilities while maintaining human oversight and accountability required in GxP environments.*
