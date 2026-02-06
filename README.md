@@ -133,21 +133,16 @@ This approach aligns with emerging industry practices for AI-assisted developmen
 
 ## How to Use This Repository
 
-### For Validation Professionals
+### For IT Validation Professionals
 1. Review `00_Project_Context/Methodology.md` for the validation approach
 2. Examine `01_Login/` as a complete validation package example
-3. Explore `00_Project_Context/Skills/` for decision frameworks
+3. Explore `00_Project_Context/Skills/` for decision frameworks (upcoming)
 4. Adapt methodology for your own validation work
 
 ### For QA/Testing Practitioners
 1. See `Feature_Observation_Login.md` for black-box testing approach
 2. Review `Verification_Report_Login.md` for AI accuracy validation
 3. Study traceability structure (URS → FRS → DS → OQ)
-
-### For AI/ML Engineers
-1. Review `00_Project_Context/Sambhava_Application_Context.md` for context engineering example
-2. Study how context enables accurate AI-assisted validation
-3. Explore Skills folder for domain-specific AI guidance
 
 ---
 
