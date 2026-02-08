@@ -76,7 +76,7 @@ Example: `feature_boundary_skill.md` - How to define feature scope
 
 **With Claude Code (or any AI tool):**
 ```
-Working directory: C:\Users\motic\sambhava-validation-portfolio
+Working directory: C:\Users\[username]\path
 
 Read 00_Project_Context\ for full context.
 

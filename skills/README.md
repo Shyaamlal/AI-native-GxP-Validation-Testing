@@ -1,263 +1,285 @@
-# Validation Skills Library
+# Validation Guides
 
-**Purpose:** Reusable AI expertise for GxP validation testing
+**What's in this folder:** 8 step-by-step guides for each phase of the validation workflow
 
-**Status:** Core methodology skills (v1.0)  
 **Last Updated:** 2026-02-08
 
 ---
 
-## What Are Skills?
+## What's in This Folder?
 
-**Skills** are reusable AI behaviors that encapsulate domain expertise, quality criteria, and best practices for specific validation tasks.
+This folder contains 8 guides that walk you through each phase of validation, from initial testing through final verification. Each guide includes:
 
-Think of skills as **specialized assistants** that know:
-- What makes good validation documentation
-- What quality criteria to apply
-- What templates to use
-- What verification steps humans should perform
-
----
-
-## Skills vs Prompts vs Templates
-
-### Skills (Reusable Expertise)
-**What:** Specialized AI capabilities with embedded domain knowledge  
-**Example:** "Feature Observation Documenter" skill  
-**Contains:**
-- Domain knowledge (GAMP 5, IEC 62304 principles)
-- Quality criteria (what makes good vs poor output)
-- Invocation pattern (how to use this skill)
-- Verification checklist (how humans review output)
-
-### Prompts (One-Time Instructions)
-**What:** Specific instance of using a skill  
-**Example:** "Using Feature Observation Documenter skill, organize these Logout test notes: [notes]"  
-**Contains:**
-- Skill name to invoke
-- Actual data for THIS feature
-- Context for this specific use
-
-### Templates (Output Structures)
-**What:** Document skeletons that get filled in  
-**Example:** `Feature_Observation_Template.md`  
-**Contains:**
-- Section headings
-- Required fields
-- Format specifications
-- Consistency standards
+- **Step-by-step instructions** for what to do
+- **Real examples** from the Login and Logout features
+- **Templates** you can adapt for your own work
+- **Quality checks** to verify your results
 
 ---
 
-## How to Use This Skill Library
+## The 8 Guides
+
+| # | Guide Name | Validation Phase | When to Use |
+|---|------------|------------------|-------------|
+| 1 | **Feature Observation** | Initial Testing | After you've manually tested the feature |
+| 2 | **Scope Definition** | Boundary Setting | Before you start analyzing code |
+| 3 | **Code Investigation** | Technical Analysis | When you need to understand the implementation |
+| 4 | **Design Specification** | Technical Documentation | After you've analyzed the code |
+| 5 | **Functional Requirements** | System Behaviors | After design spec is complete |
+| 6 | **User Requirements** | Business Needs | After functional requirements are done |
+| 7 | **Test Protocol** | Test Planning | When you're ready to execute formal tests |
+| 8 | **Verification Report** | Quality Verification | After AI has generated any documentation |
+
+---
+
+## How to Use These Guides
 
 ### Basic Workflow
 
 ```
 1. Identify which validation phase you're in
    ↓
-2. Select the corresponding skill
+2. Open the corresponding guide
    ↓
-3. Read the skill document (understand what it does)
+3. Read the guide to understand the process
    ↓
-4. Follow the invocation pattern
+4. Follow the step-by-step instructions
    ↓
-5. Provide your feature-specific data
+5. Provide your feature-specific information
    ↓
-6. AI generates output using skill's embedded knowledge
+6. Use AI to help generate documentation (following the guide)
    ↓
-7. Human verifies output using skill's verification checklist
+7. Review the output using the quality checklist
    ↓
-8. Approve or refine
+8. Approve or refine as needed
 ```
 
 ---
 
-## Available Skills
+## Example: Using Guide 1 (Feature Observation)
 
-### Core Validation Workflow Skills
-
-| # | Skill Name | Validation Phase | Template Used | When to Use |
-|---|------------|------------------|---------------|-------------|
-| 1 | **Feature Observation Documenter** | Feature Observation | Feature_Observation_Template.md | After manual black-box testing |
-| 2 | **Scope Boundary Analyzer** | Boundary Definition | Feature_Boundary_Template.md | Before code investigation |
-| 3 | **Technical Investigator** | Code Investigation | Code_Investigation_Template.md | When analyzing implementation |
-| 4 | **Design Specification Writer** | DS Documentation | DS_Template.md | After code investigation complete |
-| 5 | **Functional Requirements Writer** | FRS Documentation | FRS_Template.md | After DS approved |
-| 6 | **User Requirements Writer** | URS Documentation | URS_Template.md | After FRS approved |
-| 7 | **Test Protocol Generator** | OQ Protocol | OQ_Protocol_Template.md | When ready to execute tests |
-| 8 | **Verification Reporter** | Verification | Verification_Report_Template.md | After AI outputs generated |
-
----
-
-## Skill Invocation Pattern
-
-### Standard Format
-
-All skills follow this invocation pattern:
-
-```markdown
-**Context Loading:**
-- Load: Methodology.md (validation approach)
-- Load: Sambhava_Application_Context.md (application knowledge)
-- Load: [Previous phase documents as needed]
-
-**Skill Invocation:**
-Using the [SKILL_NAME] skill, [task description]
-
-**Feature-Specific Data:**
-[Your actual data for this feature]
-
-**Quality Requirements:**
-- [Any specific quality criteria]
-- [Compliance standards to apply]
-
-**Output Format:**
-Use template: [Template_Name.md]
-```
-
-### Example (Skill 1: Feature Observation Documenter)
-
-```markdown
-**Context Loading:**
-- Load: Methodology.md
-- Load: Sambhava_Application_Context.md
-
-**Skill Invocation:**
-Using the Feature Observation Documenter skill, organize these raw test notes into a structured Feature Observation document.
-
-**Feature-Specific Data:**
-Feature: Admin Logout
-Test Date: 2026-02-06
-Tester: Shyaam
-
-Raw observations:
+### What You Have:
+After manually testing the Logout feature, you have these notes:
 - Logout button appears in header (far right)
 - Hover shows "Logout" tooltip
-- Single click triggers logout
+- Single click logs out immediately
 - No confirmation dialog
-- localStorage key "isAdminLoggedIn" deleted (verified in DevTools)
-- After logout, /admin/dashboard returns 404
+- localStorage key "isAdminLoggedIn" is deleted
+- After logout, /admin/dashboard shows 404
 
-**Quality Requirements:**
-- Observable behaviors only (no assumptions about implementation)
-- Clear, specific descriptions
-- Organized by workflow sequence
+### What You Do:
 
-**Output Format:**
-Use template: Feature_Observation_Template.md
+**Step 1:** Open `Skill_1_Feature_Observation_Documenter.md`
+
+**Step 2:** Read the guide to understand what makes good feature documentation
+
+**Step 3:** Follow the instructions to organize your notes
+
+**Step 4:** Use the AI prompt template from the guide:
+```
+I've manually tested the Admin Logout feature. Here are my observations:
+[paste your notes]
+
+Please organize these into a structured Feature Observation document.
+```
+
+**Step 5:** Review the AI output using the quality checklist in the guide
+
+**Step 6:** Edit or approve
+
+**Result:** Professional Feature Observation document ready for your validation package
+
+---
+
+## What Each Guide Contains
+
+### Every guide includes:
+
+**1. Purpose**
+- What this validation phase accomplishes
+- Why it's important
+- Where it fits in the workflow
+
+**2. Instructions**
+- Clear steps for what to do
+- What information you need
+- How to provide it to AI
+
+**3. AI Prompt Templates**
+- Ready-to-use prompts for AI tools
+- Fill-in-the-blank format
+- Works with Claude, ChatGPT, Gemini, or other AI
+
+**4. Real Examples**
+- Actual prompts used in Login/Logout validation
+- What the AI generated
+- How it was verified
+
+**5. Quality Checklists**
+- What to look for in AI outputs
+- Common issues to watch for
+- When to regenerate vs manually edit
+
+**6. Templates**
+- Document structure to use
+- Required sections
+- Format specifications
+
+---
+
+## Works with Any AI Tool
+
+These guides work with:
+
+| AI Tool | How Well It Works | Notes |
+|---------|------------------|-------|
+| **Claude (Anthropic)** | ✅ Excellent | Good at long documents, technical content |
+| **ChatGPT (OpenAI)** | ✅ Excellent | Fast iterations, alternative perspectives |
+| **Gemini (Google)** | ✅ Good | Helpful for UI documentation |
+| **Other AI Tools** | ✅ Varies | Most modern AI tools will work |
+
+**Key requirement:** The AI tool needs to handle reasonably long context (your methodology + application info + templates).
+
+---
+
+## Validation Workflow (Complete Picture)
+
+```
+Manual Testing
+    ↓
+Guide 1: Feature Observation
+    ↓
+Guide 2: Scope Definition
+    ↓
+Guide 3: Code Investigation
+    ↓
+Guide 4: Design Specification
+    ↓
+Guide 5: Functional Requirements
+    ↓
+Guide 6: User Requirements
+    ↓
+Guide 7: Test Protocol
+    ↓
+Execute Tests
+    ↓
+Guide 8: Verification Report
+    ↓
+Validation Summary
 ```
 
 ---
 
-## Why Use Skills Instead of Raw Prompts?
+## Benefits of Using These Guides
 
-### Benefits
+### Consistency
+- Same quality standards applied every time
+- Predictable document structure
+- Easier to compare across features
 
-**1. Consistency Across Features**
-- Same quality criteria applied every time
-- Predictable output structure
-- Easier to compare documents
+### Speed
+- AI handles the writing
+- You focus on review and approval
+- Demonstrated: 67% faster on second feature
 
-**2. Domain Knowledge Embedded**
-- AI knows GAMP 5 / IEC 62304 principles
-- Quality standards built-in
-- Reduces human burden of specifying criteria
+### Quality
+- Best practices built into the guides
+- Quality checks prevent common mistakes
+- GAMP 5 / IEC 62304 principles included
 
-**3. Tool Agnostic**
-- Works with Claude, ChatGPT, Gemini, or any LLM
-- Methodology portable across AI platforms
-- Not locked into specific vendor
-
-**4. Reproducible Methodology**
-- Others can use your skills
-- Enables knowledge transfer
-- Supports team scaling
-
-**5. Continuous Improvement**
-- Skills can be refined based on lessons learned
-- Version controlled (Git)
-- Evolves with experience
+### Reusability
+- Use for any feature you validate
+- Adapt to your specific application
+- Share with your team
 
 ---
 
-## How to Extend This Library
+## Tips for Best Results
 
-### Adding New Skills
+### Before You Start:
+1. **Complete the previous phase** - Each guide builds on the previous one
+2. **Have your information ready** - Test notes, code access, etc.
+3. **Read the guide first** - Understand the process before jumping in
 
-When you identify a repeatable validation task:
+### While Using AI:
+1. **Be specific** - Provide clear, detailed information
+2. **Use the templates** - They ensure consistency
+3. **Follow the prompt format** - The guides provide tested patterns
 
-1. **Document the skill:**
-   - What problem does it solve?
-   - What domain knowledge is required?
-   - What quality criteria apply?
-
-2. **Create skill file:**
-   - Follow the skill template structure
-   - Include real examples from your work
-   - Define verification checklist
-
-3. **Test the skill:**
-   - Use it on a feature
-   - Verify outputs
-   - Refine based on results
-
-4. **Add to library:**
-   - Update this README with skill entry
-   - Commit to Git with description
-   - Share with community
+### After AI Generates Output:
+1. **Use the quality checklist** - Every guide has one
+2. **Verify accuracy** - AI can make mistakes
+3. **Edit if needed** - You're accountable, not the AI
+4. **Document your review** - Note any changes you made
 
 ---
 
-## Skill Development Best Practices
+## Understanding the Architecture
 
-### What Makes a Good Skill?
+### How These Guides Work
 
-**Clear Purpose:**
-- ✅ Solves one specific problem
-- ✅ Clear boundaries (what it does/doesn't do)
-- ❌ Avoid multi-purpose "do everything" skills
+Each guide is structured in three layers:
 
-**Embedded Expertise:**
-- ✅ Contains domain knowledge (GAMP 5, regulations)
-- ✅ Quality criteria defined
-- ✅ Common pitfalls documented
-- ❌ Don't assume users know validation principles
+**Layer 1: Instructions (What You Do)**
+- The steps you follow manually
+- Information you need to gather
+- Decisions you need to make
 
-**Practical Examples:**
-- ✅ Real examples from actual work
-- ✅ Shows both good and problematic outputs
-- ✅ Demonstrates verification process
-- ❌ Avoid theoretical-only examples
+**Layer 2: AI Assistance (What AI Does)**
+- Prompt templates you use
+- How AI helps with documentation
+- What AI generates
 
-**Verification Guidance:**
-- ✅ Clear checklist for human review
-- ✅ Confidence criteria defined
-- ✅ Edge cases to watch for
-- ❌ Don't skip verification documentation
+**Layer 3: Verification (What You Check)**
+- Quality criteria for outputs
+- How to verify accuracy
+- When to regenerate or edit
+
+**Important:** You're always in control. AI assists with writing, you maintain accountability.
 
 ---
 
-## Tool Compatibility
+### How Guides Use Templates
 
-These skills work with:
+Each guide references specific templates in `/templates/` folder:
 
-| AI Tool | Compatibility | Notes |
-|---------|--------------|-------|
-| **Claude (Anthropic)** | ✅ Excellent | Long context, good at technical documentation |
-| **ChatGPT (OpenAI)** | ✅ Excellent | Alternative perspectives, fast iterations |
-| **Gemini (Google)** | ✅ Good | Multi-modal capabilities useful for UI documentation |
-| **GitHub Copilot** | ⚠️ Partial | Better for code than long-form documentation |
-| **Custom LLMs** | ✅ Depends | Effectiveness varies by model capability |
+**The relationship:**
+```
+Guide (Instructions)
+    ↓ uses
+Template (Structure)
+    ↓ produces
+Document (Output)
+    ↓ reviewed by
+Human (Accountability)
+```
 
-**Key requirement:** AI tool must handle long context (methodology + application context + templates).
+**Example:**
+- Guide 1 (Feature Observation) → uses → Feature_Observation_Template.md
+- Template provides section headers, required fields
+- AI fills in the template with your specific data
+- You review and approve
 
 ---
 
-## Skill Library Structure
+### How Guides Connect to Methodology
+
+All guides implement principles from `Methodology.md`:
+
+- **Retrospective validation** approach
+- **GAMP 5 Appendix M3** guidelines
+- **IEC 62304** traceability requirements
+- **Human accountability** for all decisions
+- **AI as Category 1 authoring tool** classification
+
+The guides are the practical application of these principles.
+
+---
+
+## Folder Structure
 
 ```
-/skills/
+/Skills/
 ├── README.md (this file)
 ├── Skill_1_Feature_Observation_Documenter.md
 ├── Skill_2_Scope_Boundary_Analyzer.md
@@ -269,35 +291,86 @@ These skills work with:
 └── Skill_8_Verification_Reporter.md
 ```
 
----
-
-## Relationship to Other Portfolio Components
-
-### Skills Use Templates
-Each skill references specific template(s) in `/templates/` folder.
-
-### Skills Generate Artifacts
-Skill outputs become validation documents in feature folders (e.g., `/01_Login/`, `/02_Logout/`).
-
-### Skills Follow Methodology
-All skills implement principles documented in `Methodology.md`.
-
-### Skills Reference Application Context
-Most skills load `Sambhava_Application_Context.md` for domain knowledge.
+**Note:** File names use "Skill_X" for consistency with initial development, but they function as step-by-step guides.
 
 ---
 
 ## Success Criteria
 
-**You've successfully used a skill when:**
+**You've successfully used a guide when:**
 
-1. ✅ AI output follows template structure
-2. ✅ Quality criteria from skill are met
-3. ✅ Verification checklist completed
-4. ✅ Human approves output with confidence
-5. ✅ Output is audit-ready
+1. ✅ You followed the instructions in sequence
+2. ✅ AI generated output following the template
+3. ✅ You verified quality using the checklist
+4. ✅ You approved the output with confidence
+5. ✅ The document is audit-ready
 
-**If any criteria fail:** Refine prompt, regenerate, or manually edit output.
+**If any criteria aren't met:** Review the guide, adjust your prompt, regenerate, or manually edit.
+
+---
+
+## How This Fits Into Your Portfolio
+
+### Relationship to Other Components:
+
+**These guides generate documents** that go in feature folders:
+- `/01_Login/` - Login validation documents
+- `/02_Logout/` - Logout validation documents
+
+**These guides follow the methodology** documented in:
+- `/00_Project_Context/Methodology.md`
+
+**These guides reference application knowledge** from:
+- `/00_Project_Context/Sambhava_Application_Context.md`
+
+**The AI process** is documented in:
+- `AI_Process_Documentation.md` (shows real examples)
+
+---
+
+## Adapting for Your Own Work
+
+### To use these guides for your application:
+
+**Step 1: Update Application Context**
+- Create your own application context document
+- Include: business purpose, workflows, technical architecture
+- Reference it when using the guides
+
+**Step 2: Customize Templates**
+- Adapt templates to your organization's standards
+- Keep the core structure, adjust details
+- Maintain consistency across features
+
+**Step 3: Follow the Guides**
+- Use the same workflow sequence
+- Adapt examples to your features
+- Apply the quality checklists
+
+**Step 4: Refine as You Learn**
+- Each feature teaches you something
+- Update your process based on lessons learned
+- The methodology improves over time
+
+---
+
+## Getting Help
+
+**Questions about a specific guide?**
+- Read the guide's "Purpose" and "When to Use" sections
+- Check the examples section for similar scenarios
+- Review the quality checklist for common issues
+
+**Issues with AI outputs?**
+- Verify you're using the prompt template correctly
+- Check that you provided enough detail
+- Try regenerating with more specific instructions
+- Remember: You can always edit manually
+
+**Want to improve a guide?**
+- Document what worked better
+- Test your improvement on another feature
+- Consider contributing back to the methodology
 
 ---
 
@@ -305,27 +378,27 @@ Most skills load `Sambhava_Application_Context.md` for domain knowledge.
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v1.0 | 2026-02-08 | Initial skill library created. Core 8 skills for Login/Logout validation workflow. |
+| v1.0 | 2026-02-08 | Initial guides created for Login/Logout validation workflow |
 
 ---
 
 ## Contributing
 
-**Found a better way to use a skill?**
+**Found a better way to use a guide?**
 - Document your improvement
-- Test on multiple features
-- Submit refined skill version
+- Test it on multiple features
+- Share your refined approach
 
-**Created a new skill?**
-- Follow skill template structure
+**Created a guide for a new phase?**
+- Follow the same structure
 - Include real examples
-- Add verification checklist
+- Add quality checklists
 - Update this README
 
 ---
 
-**Remember:** Skills are **methodology artifacts**, not just prompts. They encode your expertise so others can reproduce your results.
+**Remember:** These guides are tools to make your validation work faster and more consistent. You're always the decision-maker and remain accountable for the results.
 
 ---
 
-**End of Skills Library README**
+**End of Validation Guides README**

@@ -3,7 +3,7 @@
 **Purpose:** This document explains how AI tools are used within the validation workflow, including prompts, verification methods, and human decision points.
 
 **Status:** Living document (updated as methodology evolves)  
-**Last Updated:** 2026-02-07
+**Last Updated:** 2026-02-08
 
 ---
 
@@ -33,14 +33,14 @@ AI tools in this project are used as **GAMP 5 Category 1 - Authoring Tools**, si
 
 **This document** shows **what was done** - real examples of how AI was used in Login and Logout validation.
 
-**The Skills Library** (`/skills/` folder) shows **how to replicate** - reusable expertise you can apply to your own features.
+**The Skills Library** (`/Skills/` folder) shows **how to replicate** - reusable expertise you can apply to your own features.
 
 ### How They Work Together
 
 | Document | Purpose | Content |
 |----------|---------|---------|
 | **AI_Process_Documentation.md** (this file) | Transparency & real examples | Shows actual prompts used, AI responses received, verification performed on Login/Logout features |
-| **Skills Library** (`/skills/`) | Replicable methodology | Provides fill-in-the-blank skill invocations you can use for YOUR features |
+| **Skills Library** (`/Skills/`) | Replicable methodology | Provides fill-in-the-blank skill invocations you can use for YOUR features |
 
 **Analogy:**
 - This document = "Here's how I validated Login/Logout with AI"
@@ -49,7 +49,7 @@ AI tools in this project are used as **GAMP 5 Category 1 - Authoring Tools**, si
 **For transparency:** Read this document  
 **For replication:** Use the Skills Library
 
-See `/skills/README.md` for complete Skills Library documentation.
+See `/Skills/README.md` for complete Skills Library documentation.
 
 ---
 
@@ -753,7 +753,7 @@ Each validation document includes metadata showing AI involvement:
 - Each skill provides fill-in-the-blank invocation patterns
 - Includes domain knowledge, quality criteria, and verification checklists
 - Enables methodology replication across features and teams
-- See `/skills/README.md` for complete documentation
+- See `/Skills/README.md` for complete documentation
 
 ---
 
