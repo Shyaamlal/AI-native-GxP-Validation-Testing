@@ -4,7 +4,7 @@
 
 **Objective:** Demonstrate reproducible, feature-level validation workflows that use AI to accelerate documentation and analysis, with clear human oversight and regulatory accountability.
 
-**Key Differentiator:** Includes reusable **Skills Library** - 8 validation skills that work with any AI tool (Claude, ChatGPT, Gemini).
+**Contents:** Validation methodology with reusable templates, complete feature examples, and documented AI assistance process.
 
 **Status:** Active development - 2 features validated (Login, Logout).
 
@@ -14,7 +14,7 @@
 
 **Want to try this methodology?**
 1. **For transparency:** Read [AI_Process_Documentation.md](./AI_Process_Documentation.md) - see how AI was used
-2. **For replication:** Explore [`/skills/`](./skills/) folder - use these skills on your own features
+2. **For replication:** Explore [`/Skills/`](./Skills/) folder - use these skills on your own features
 3. **For examples:** Review [`/01_Login/`](./01_Login/) - complete validation package
 
 ---
@@ -24,9 +24,9 @@
 ```
 AI-native-GxP-Validation-Testing/
 │
-├── skills/                          # 🎯 Reusable Validation Skills
-│   ├── README.md                    # Skills Library overview
-│   ├── Skills_Quick_Reference.md   # One-page lookup guide
+├── Skills/                          # Reusable validation methodology
+│   ├── README.md
+│   ├── Skills_Quick_Reference.md
 │   ├── Skill_1_Feature_Observation_Documenter.md
 │   ├── Skill_2_Scope_Boundary_Analyzer.md
 │   ├── Skill_3_Technical_Investigator.md
@@ -36,14 +36,19 @@ AI-native-GxP-Validation-Testing/
 │   ├── Skill_7_Test_Protocol_Generator.md
 │   └── Skill_8_Verification_Reporter.md
 │
-├── AI_Process_Documentation.md     # 📋 How AI was used (transparency)
+├── AI_Process_Documentation.md     # How AI was used (transparency)
 │
-├── 00_Project_Context/              # Application and methodology knowledge
+├── 00_Project_Context/              # Methodology and application knowledge
+│   ├── Learning_Journals/           # Process observations and insights
+│   ├── Templates/                   # Reusable document templates
+│   ├── Thread_Summaries/            # Historical decisions and outcomes
 │   ├── Methodology.md               # Validation approach and workflow
-│   ├── Sambhava_Application_Context.md  # Application-specific knowledge
-│   └── Templates/                   # Document templates
+│   ├── README.md                    # Context management overview
+│   └── Sambhava_Application_Context.md  # Application-specific knowledge
 │
-├── 01_Login/                        # ✅ Feature 1: Admin Login (Complete)
+├── 00_Validation_Management/        # Cross-feature traceability
+│
+├── 01_Login/                        # Feature 1: Admin Login
 │   ├── Feature_Observation_Login.md
 │   ├── Feature_Boundary_Definition_Login.md
 │   ├── DS_Login.md                 # Design Specification
@@ -53,35 +58,12 @@ AI-native-GxP-Validation-Testing/
 │   ├── Verification_Report_Login.md
 │   └── Validation_Summary_Login.md
 │
-├── 02_Logout/                       # ✅ Feature 2: Admin Logout (Complete)
+├── 02_Logout/                       # Feature 2: Admin Logout
 │   └── [Complete validation package]
 │
+├── .gitignore
 └── README.md                        # This file
 ```
-
----
-
-## Skills Library - The Core Differentiator
-
-**What is it?**  
-8 reusable validation skills that encapsulate domain expertise, quality criteria, and verification methods. Each skill provides fill-in-the-blank invocation patterns that work with any AI tool.
-
-**Why it matters:**  
-Most people share "prompts I used once." This shares **methodology-as-code** - reusable expertise applicable to any feature validation.
-
-**The 8 Skills:**
-1. **Feature Observation Documenter** - Organize manual test notes into structured observations
-2. **Scope Boundary Analyzer** - Define IN SCOPE vs OUT OF SCOPE with rationale
-3. **Technical Investigator** - Analyze code implementation systematically
-4. **Design Specification Writer** - Document as-built technical design
-5. **Functional Requirements Writer** - Define system behaviors (implementation-agnostic)
-6. **User Requirements Writer** - Capture business needs and user expectations
-7. **Test Protocol Generator** - Create executable test cases with traceability
-8. **Verification Reporter** - Document AI verification methods and results
-
-**See:** [`/skills/README.md`](./skills/README.md) for complete documentation.
-
-**Tool-agnostic:** Works with Claude, ChatGPT, Gemini, or any AI tool.
 
 ---
 
@@ -151,6 +133,31 @@ Every AI-assisted document includes metadata showing:
 
 ---
 
+## Skills Library
+
+The `/Skills/` folder contains 8 step-by-step guides that walk through each phase of the validation workflow. These guides provide:
+
+- Specific instructions for what to do at each step
+- Real examples from the Login and Logout features
+- Templates you can adapt for your own validation work
+- Quality checks to verify your work
+
+**The 8 guides cover:**
+1. **Feature Observation** - Document what the software does through manual testing
+2. **Scope Definition** - Determine what's included vs excluded in validation
+3. **Code Investigation** - Analyze the source code systematically
+4. **Design Specification** - Document the technical implementation
+5. **Functional Requirements** - Describe what the system does (independent of how it's built)
+6. **User Requirements** - Capture what users need the system to do
+7. **Test Protocol** - Create test cases with full traceability
+8. **Verification Report** - Document how you verified AI-generated content
+
+Each guide includes detailed instructions, real examples, and can be used with any AI tool (Claude, ChatGPT, Gemini, etc.).
+
+**See:** [`/Skills/README.md`](./Skills/README.md) for complete documentation and usage examples.
+
+---
+
 ## Validation Results
 
 ### Feature 1: Admin Login
@@ -172,22 +179,22 @@ Every AI-assisted document includes metadata showing:
 ## How to Use This Repository
 
 ### For Validation Professionals
-1. **Learn the approach:** Read [`/skills/README.md`](./skills/README.md) - understand the Skills Library concept
+1. **Learn the approach:** Read [`/Skills/README.md`](./Skills/README.md) - see the step-by-step guides
 2. **See it in action:** Review [AI_Process_Documentation.md](./AI_Process_Documentation.md) - real examples from Login/Logout
-3. **Try a skill:** Pick Skill 1 (Feature Observation Documenter) and apply to your feature
+3. **Try a guide:** Start with Feature Observation and apply it to your own software
 4. **See complete package:** Explore [`/01_Login/`](./01_Login/) - full validation artifacts
-5. **Adapt for your work:** Use skills as templates for your own validation projects
+5. **Adapt for your work:** Use the guides as starting points for your own validation projects
 
 ### For QA/Testing Practitioners
 1. **Black-box testing:** See `Feature_Observation_Login.md` for systematic observation approach
 2. **AI verification:** Review `Verification_Report_Login.md` for how AI outputs are validated
 3. **Traceability:** Study URS → FRS → DS → OQ structure
-4. **Skills application:** Try Skill 7 (Test Protocol Generator) for your test case creation
+4. **Test protocols:** See how test cases are created with full traceability
 
 ### For AI Practitioners
 1. **Context engineering:** See `Sambhava_Application_Context.md` for application knowledge structure
 2. **Verification methods:** Learn commission vs omission error checking approaches
-3. **Methodology patterns:** Extract reusable patterns from Skills Library
+3. **Workflow patterns:** See how AI is integrated into validation workflows
 4. **Transparency:** Study how AI usage is documented for audit readiness
 
 ---
@@ -212,10 +219,10 @@ Every AI-assisted document includes metadata showing:
 
 ## Structure Principles
 
-- **Skills-first:** Reusable methodology encoded as skills (not just examples)
+- **Step-by-step guides:** Clear instructions for each validation phase (not just examples)
 - **Feature-centric:** Each feature validated as independent unit with complete traceability
 - **Transparency:** All AI usage documented with verification methods
-- **Tool-agnostic:** Skills work with any AI tool (Claude, ChatGPT, Gemini)
+- **Works with any AI:** Guides work with Claude, ChatGPT, Gemini, or other tools
 - **Audit-friendly:** All documents human-readable, version-controlled, traceable
 
 ---
@@ -223,9 +230,9 @@ Every AI-assisted document includes metadata showing:
 ## Repository Goals
 
 1. **Demonstrate systematic validation methodology** suitable for regulated industries
-2. **Provide reusable Skills Library** applicable to other validation projects
+2. **Provide practical guides** applicable to other validation projects
 3. **Document AI-assisted workflows** that maintain GxP compliance
-4. **Enable methodology replication** through transparent process documentation
+4. **Enable replication** through transparent process documentation
 
 ---
 
@@ -236,9 +243,9 @@ This repository documents an active exploration. Feedback, questions, and discus
 **Areas of interest:**
 - GxP validation best practices
 - AI tool usage in regulated environments
-- Skills Library application to other validation projects
+- Applying these guides to other validation projects
 - Verification methods for AI-generated content
-- Context engineering for domain-specific AI applications
+- Building application-specific context for AI tools
 
 ---
 
@@ -258,5 +265,3 @@ This methodology documentation is shared for educational and professional refere
 ---
 
 *This repository represents a practical exploration of AI-assisted validation methodologies for regulated industries. All validation decisions, risk assessments, and regulatory conclusions remain under human authority and accountability.*
-
-**Key Differentiator:** The Skills Library is methodology-as-code - reusable validation expertise that works across features, teams, and AI tools.
