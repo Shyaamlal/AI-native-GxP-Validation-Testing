@@ -518,3 +518,18 @@ Test cases are numbered OQ-LOGIN-001 through OQ-LOGIN-008 and provide complete t
 Test execution should be conducted in a controlled environment with documented browser and application versions. All test results, pass/fail status, and evidence should be captured during execution.
 
 Any deviations from expected results should be documented as defects and assessed for impact on validation conclusion.
+
+---
+
+## AI Assistance Record
+
+**Drafted by:** Claude 3.5 Sonnet (Anthropic)  
+**Draft Date:** 2026-02-04  
+**Human Review:** Complete (Shyaam, 2026-02-04)  
+**Verification Method:** Test cases traced to all FRS requirements (15/15, 100% coverage), traceability matrix verified  
+**Confidence Level:** High  
+**Final Accountability:** Shyaam (Validation Engineer)
+
+*See AI_Process_Documentation.md for complete details on AI usage in validation workflow.*
+
+---
