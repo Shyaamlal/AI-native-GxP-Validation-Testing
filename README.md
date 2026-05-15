@@ -44,7 +44,7 @@ AI-native-GxP-Validation-Testing/
 │   ├── Thread_Summaries/            # Historical decisions and outcomes
 │   ├── Methodology.md               # Validation approach and workflow
 │   ├── README.md                    # Context management overview
-│   └── Sambhava_Application_Context.md  # Application-specific knowledge
+│   └── Application_Context.md       # Application-specific knowledge
 │
 ├── 00_Validation_Management/        # Cross-feature traceability
 │
@@ -192,7 +192,7 @@ Each guide includes detailed instructions, real examples, and can be used with a
 4. **Test protocols:** See how test cases are created with full traceability
 
 ### For AI Practitioners
-1. **Context engineering:** See `Sambhava_Application_Context.md` for application knowledge structure
+1. **Context engineering:** See `Application_Context.md` for application knowledge structure
 2. **Verification methods:** Learn commission vs omission error checking approaches
 3. **Workflow patterns:** See how AI is integrated into validation workflows
 4. **Transparency:** Study how AI usage is documented for audit readiness
@@ -202,7 +202,7 @@ Each guide includes detailed instructions, real examples, and can be used with a
 ## Technical Details
 
 ### Application Under Validation
-**Sambhava** - Voice analysis application for employability assessment
+**Voice analysis platform** — employability assessment application used by HR professionals and NGO administrators.
 - **Technology:** React, TypeScript, Vite
 - **Deployment:** Vercel (production)
 - **Users:** NGO administrators, HR professionals
@@ -259,7 +259,7 @@ This methodology documentation is shared for educational and professional refere
 
 ## Contact
 
-**LinkedIn:** [Connect for discussions on AI-native validation](https://www.linkedin.com/in/shyaamlal/)  
+**LinkedIn:** [Connect for discussions on AI-native validation](https://www.linkedin.com/in/shyaamlal-n-n/)  
 **GitHub Issues:** For questions, feedback, or methodology discussions
 
 ---
