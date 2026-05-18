@@ -513,6 +513,12 @@ The current repository is a demonstration *instance*: the framework (`.claude/sk
 
 Open: should the framework be packaged separately — as a Claude Code plugin, a pip package, or an installable skill set — so new application repositories can pull it in cleanly? Plugin packaging gives clean framework / instance separation, version pinning, and a path to a marketplace listing. Trade-off is setup overhead (a second repo to maintain, plugin distribution, version migration). Best resolved once the framework has been run against at least one second application (Phase 5) and the actually-stable surface is known. Until then, the demonstration repo serves both purposes — the framework is *visibly* portable even if not yet *packaged* portable.
 
+### 11.16 Feature Naming Convention
+
+Across a team, the same feature may be referred to differently — `logout`, `log-out`, `sign-out`, `logout-process`. Without a convention, the framework gets duplicate feature folders, broken upstream traceability references between artifacts, and audit log entries that fragment across name variants. The single canonical name is also what binds change requests, JIRA tickets, validated scope, and final summary report into one auditable unit.
+
+Open: define a canonical-name convention enforced at Step 0 of the Orchestrator. Likely shape: (a) feature names are lowercase, hyphen-separated slugs (`logout`, `add-client`, `voice-assessment-submission`); (b) the Orchestrator's Step 0 checks for existing feature folders and proposes the canonical name; (c) optional alias mapping (`log-out`, `sign-out` → `logout`) registered in `00_Project_Context/feature_aliases.json` so reviewers can refer to a feature by any internal name and resolve to the canonical one; (d) tie the canonical name to the upstream change request / ticket where possible so naming inherits an existing convention. Best resolved after Phase 5 surfaces real team-coordination friction in the dog-food runs.
+
 ---
 
 ## Appendix A — Relationship to the Existing `Methodology.md`
