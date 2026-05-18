@@ -67,7 +67,7 @@ def _matches(entry: dict, args: argparse.Namespace) -> bool:
         return False
     if args.phase is not None and entry.get("phase") != args.phase:
         return False
-    if args.rung and entry.get("rung") != args.rung:
+    if args.phase_name and entry.get("phase_name") != args.phase_name:
         return False
     if args.skill and entry.get("agent_skill") != args.skill:
         return False
@@ -97,14 +97,15 @@ def _render_table(entries: Iterable[dict]) -> str:
     if not rows:
         return "(no matching entries)"
 
-    headers = ["timestamp", "feature", "rung", "skill", "model", "schema", "approval", "reviewer"]
+    headers = ["timestamp", "feature", "phase", "phase_name", "skill", "model", "schema", "approval", "reviewer"]
     table: list[list[str]] = [headers]
     for e in rows:
         table.append(
             [
                 str(e.get("timestamp", "")),
                 str(e.get("feature", "")),
-                str(e.get("rung", e.get("phase", ""))),
+                str(e.get("phase", "")),
+                str(e.get("phase_name", "")),
                 str(e.get("agent_skill", "")),
                 str(e.get("model", "")),
                 str(e.get("schema_result", "")),
@@ -134,7 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--artifact", help="Filter by exact artifact_path")
     parser.add_argument("--status", choices=["pending", "approved", "rejected"], help="Filter by approval status")
     parser.add_argument("--phase", type=int, help="Filter by phase number (1-8)")
-    parser.add_argument("--rung", help="Filter by rung name (e.g. feature-scoping)")
+    parser.add_argument("--phase-name", dest="phase_name", help="Filter by phase name (e.g. feature-scoping)")
     parser.add_argument("--skill", help="Filter by agent_skill")
     parser.add_argument("--since", help="Earliest timestamp (YYYY-MM-DD or ISO-8601)")
     parser.add_argument("--until", help="Latest timestamp (YYYY-MM-DD or ISO-8601)")

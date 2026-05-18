@@ -1,12 +1,12 @@
 # `validators/` — Schema Validation Layer (Python)
 
-This folder contains Python schema validators, one per rung that produces an artifact. The Orchestrator calls these at the phase-complete handoff to verify the specialist agent's artifact passes structural checks before surfacing it to the human review gate.
+This folder contains Python schema validators, one per phase that produces an artifact. The Orchestrator calls these at the phase-complete handoff to verify the specialist agent's artifact passes structural checks before surfacing it to the human review gate.
 
-**Status:** Phase 3 build in progress. Per design v1.1 — see `../00_Project_Context/Agentic_Framework_Design.md` §10.1 (Validators) and ADR-003 (Schema Validation as the Phase-Complete Gate).
+**Status:** Phase 3 complete. Per design v1.2 — see `../00_Project_Context/Agentic_Framework_Design.md` §10.1 (Validators) and ADR-003 (Schema Validation as the Phase-Complete Gate).
 
-## Planned validators (one per rung)
+## Validators (one per phase)
 
-- `feature_scoping.py` — Phase 1 (built)
+- `feature_scoping.py` — Phase 1
 - `risk_assessment.py` — Phase 2
 - `validation_scope.py` — Phase 3
 - `urs.py` — Phase 4
@@ -20,7 +20,7 @@ Each validator checks:
 - Required frontmatter fields present and non-empty (artifact_type, feature, version, status, ai_assistance, human_review, traceability)
 - Required content sections present and non-empty
 - No forbidden placeholder patterns (`[Document what happened]`, `TODO`, `TBD`, `[describe...]`, etc.)
-- Content-specific rules per rung (e.g. URS validator confirms unique requirement IDs; FRS validator confirms every requirement has ≥1 acceptance criterion; OQ validator confirms every test case traces to at least one requirement)
+- Content-specific rules per phase (e.g. URS validator confirms unique requirement IDs; FRS validator confirms every requirement has ≥1 acceptance criterion; OQ validator confirms every test case traces to at least one requirement)
 
 ## Why Python and not prompt-based self-check
 
@@ -31,7 +31,7 @@ See `feature_scoping.py` as the reference implementation. New validators follow 
 ## Invocation
 
 ```bash
-python validators/<rung>.py <artifact_path>
+python validators/<phase>.py <artifact_path>
 ```
 
 Returns exit code 0 on pass, 1 on fail. Stdout is a JSON object with `pass`, `artifact`, `validator`, `errors`.

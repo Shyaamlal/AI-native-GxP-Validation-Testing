@@ -1,10 +1,10 @@
-"""Shared helpers for per-rung schema validators.
+"""Shared helpers for per-phase schema validators.
 
 The validators are standalone Python modules invoked by the Orchestrator (see
 `.claude/skills/validate-feature.md`). This module exists only to avoid
 duplicating the small set of operations every validator needs — frontmatter
-parsing, placeholder detection, section-emptiness checks. Anything rung-specific
-lives in the rung's own validator module.
+parsing, placeholder detection, section-emptiness checks. Anything phase-specific
+lives in the phase's own validator module.
 
 Per ADR-005: Python is used only where it beats prompts. These helpers are
 deterministic checks that an LLM self-check would miss intermittently.
@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Iterable
 
 # ---------------------------------------------------------------------------
-# Forbidden placeholder patterns — shared across every rung
+# Forbidden placeholder patterns — shared across every phase
 # ---------------------------------------------------------------------------
 
 FORBIDDEN_PLACEHOLDER_PATTERNS = [
@@ -202,7 +202,7 @@ def get_section_block(body: str, heading: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Validator entry point — shared shell each rung-specific module uses
+# Validator entry point — shared shell each phase-specific module uses
 # ---------------------------------------------------------------------------
 
 def run_validator(
@@ -210,7 +210,7 @@ def run_validator(
     artifact_path: Path,
     validate_fn,
 ) -> int:
-    """Run the per-rung validate function, print structured JSON, return exit code."""
+    """Run the per-phase validate function, print structured JSON, return exit code."""
     if not artifact_path.exists():
         print(
             json.dumps(

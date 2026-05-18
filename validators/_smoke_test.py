@@ -1,9 +1,9 @@
-"""Smoke test for the 8 per-rung validators + release_summary.
+"""Smoke test for the 8 per-phase validators + release_summary.
 
-Generates minimal synthetic valid and invalid artifacts for each rung, runs
+Generates minimal synthetic valid and invalid artifacts for each phase, runs
 the corresponding validator, and reports expected-vs-actual outcomes. This is
 a unit test of the validators — NOT an end-to-end framework test. The end-to-
-end test is Phase 4 of the Build Plan (dog-food run against a real feature).
+end test is Phase 4 of the Build Plan (first end-to-end run against a real feature).
 
 Run from repo root:
     python validators/_smoke_test.py

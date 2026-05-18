@@ -1,6 +1,6 @@
 # Agentic IT GxP Validation Framework
 
-An agentic framework for IT GxP validation work (computerised systems validation under GxP). A single Orchestrator skill coordinates eight specialist agents — each one rung of a V-model methodology — under Human-in-the-Loop gates and a deterministic Python reliability layer.
+An agentic framework for IT GxP validation work (computerised systems validation under GxP). A single Orchestrator skill coordinates eight specialist agents — each one phase of a V-model methodology — under Human-in-the-Loop gates and a deterministic Python reliability layer.
 
 The framework is a portfolio piece. It demonstrates how agentic systems could augment validation work in regulated environments. It is not enterprise-deployable; the relationship to production GxP requirements is set out explicitly in [§2 of the design doc](./00_Project_Context/Agentic_Framework_Design.md).
 
@@ -11,16 +11,16 @@ The framework is a portfolio piece. It demonstrates how agentic systems could au
 | Phase | Description | State |
 |---|---|---|
 | 0 | Repo audit | Complete |
-| 1 | Design | Complete — see `00_Project_Context/Agentic_Framework_Design.md` v1.1 |
+| 1 | Design | Complete — see `00_Project_Context/Agentic_Framework_Design.md` v1.2 |
 | 2 | Cleanup | Complete |
 | 3 | Build agentic framework (skills + orchestrator + Python reliability layer) | Complete |
-| 4 | First dog-food run (real feature end-to-end) | Pending |
+| 4 | First end-to-end run on a real feature | Pending |
 | 5 | Substantive non-auth feature run | Pending |
 | 6 | Governance docs | Pending |
 | 7 | Polish | Pending |
 | 8 | Narrative artifacts | Pending |
 
-Validators are unit-tested via `validators/_smoke_test.py` (18 cases — valid and invalid synthetic artifacts per rung). End-to-end framework validation requires a live feature run (Phase 4).
+Validators are unit-tested via `validators/_smoke_test.py` (18 cases — valid and invalid synthetic artifacts per phase). End-to-end framework validation requires a live feature run (Phase 4).
 
 ---
 
@@ -43,27 +43,27 @@ Production GxP deployment would require formal tool qualification (GAMP 5 Catego
 
 ## Architecture at a glance
 
-The Orchestrator walks the V-model. Feature Scoping, Risk Assessment, and Validation Scope are pre-V bounding activities; the chain then descends the specification arm (URS → FRS), jumps to the OQ rung (OQ Protocol → OQ Execution), and climbs back to the Validation Summary Report. A higher-order Release Summary skill consolidates per-feature summaries for change-request / release rollups.
+The Orchestrator walks the V-model. Feature Scoping, Risk Assessment, and Validation Scope are pre-V bounding activities; the chain then descends the specification arm (URS → FRS), crosses to the OQ phases (OQ Protocol → OQ Execution), and climbs back to the Validation Summary Report. A higher-order Release Summary skill consolidates per-feature summaries for change-request / release rollups.
 
 ```
                            ┌────────────────────────┐
                            │     Human Reviewer     │
                            │  (approves at every    │
-                           │   rung transition)     │
+                           │   phase transition)    │
                            └───────────┬────────────┘
                                        │ approve / reject
                                        ▼
         ┌─────────────────────────────────────────────────────────────┐
         │              Orchestrator  (validate-feature)               │
-        │   - Spawns specialist agents one rung at a time             │
+        │   - Spawns specialist agents one phase at a time            │
         │   - Runs the Python schema validator at each handoff        │
         │   - Writes an append-only entry to ai_assistance_log.jsonl  │
         │   - Persists state.json per feature                         │
         └─┬──────────────┬──────────────┬───────────────┬─────────────┘
           │              │              │               │
           ▼              ▼              ▼               ▼
-     Feature       Risk Assessment   ... (eight rungs total) ...   Summary
-     Scoping                                                        Report
+     Feature       Risk Assessment   ... (eight phases total) ...  Summary
+     Scoping                                                       Report
 ```
 
 Agents are bounded by role and by directional isolation (ADR-001) — each specialist reads upstream artifacts only and writes its own artifact only. The Validation Summary Report skill is a declared exception.
@@ -77,7 +77,7 @@ For the full architecture, V-model traversal details, ADRs, and deferred design 
 ```
 AI-native-GxP-Validation-Testing/
 ├── 00_Project_Context/
-│   ├── Agentic_Framework_Design.md     # The design doc (v1.1, reviewed)
+│   ├── Agentic_Framework_Design.md     # The design doc (v1.2, reviewed)
 │   ├── Application_Context.md
 │   ├── Methodology.md                  # v1 methodology — deprecated, retained for narrative arc
 │   └── Templates/
@@ -95,7 +95,7 @@ AI-native-GxP-Validation-Testing/
 │   ├── validation-oq-execution.md
 │   ├── validation-summary-report.md
 │   └── validation-release-summary.md   # Higher-order, for change-request / release rollup
-├── validators/                         # Python schema validators (one per rung)
+├── validators/                         # Python schema validators (one per phase)
 │   ├── _common.py
 │   ├── _smoke_test.py                  # 18-case unit test suite
 │   ├── feature_scoping.py
@@ -128,19 +128,19 @@ From Claude Code in the repo root:
 /validate-feature <FeatureName>
 ```
 
-The Orchestrator will walk through the eight rungs one at a time. At each rung:
+The Orchestrator will walk through the eight phases one at a time. At each phase:
 
 1. The specialist agent produces its artifact (e.g. `Feature_Scoping_<feature>.md`).
-2. The Python schema validator for that rung runs. If it fails, the agent is asked to correct and re-emit.
+2. The Python schema validator for that phase runs. If it fails, the agent is asked to correct and re-emit.
 3. The artifact is surfaced to you for `approve` / `reject <reason>` / `changes <description>`.
 4. An entry is appended to `ai_assistance_log.jsonl`.
-5. On approve, the chain advances to the next rung.
+5. On approve, the chain advances to the next phase.
 
-For a single rung: `/validate-feature <FeatureName> --rung <rung-name>`.
+For a single phase: `/validate-feature <FeatureName> --phase <phase-name>`.
 
 To resume an interrupted validation: `/validate-feature <FeatureName> --resume`.
 
-Per-rung skills, allowed upstream reads, and the state.json schema are documented in `.claude/skills/validate-feature.md`.
+Per-phase skills, allowed upstream reads, and the state.json schema are documented in `.claude/skills/validate-feature.md`.
 
 ---
 
@@ -195,7 +195,7 @@ This is prospective validation methodology (ADR-004), applied to features as the
 python validators/_smoke_test.py
 ```
 
-Generates synthetic valid and invalid artifacts for every rung, runs each through its validator, and reports expected-vs-actual. 18 cases. This is a unit test of the validator layer — not an end-to-end framework test. The end-to-end test is Phase 4 (live feature run).
+Generates synthetic valid and invalid artifacts for every phase, runs each through its validator, and reports expected-vs-actual. 18 cases. This is a unit test of the validator layer — not an end-to-end framework test. The end-to-end test is Phase 4 (live feature run).
 
 ---
 
@@ -207,10 +207,10 @@ In a real deployment, requirements would flow from JIRA / Azure DevOps; OQ proto
 
 ## Reference
 
-- [Design document v1.1](./00_Project_Context/Agentic_Framework_Design.md) — architecture, ADRs, deferred decisions
-- [Orchestrator skill](./.claude/skills/validate-feature.md) — invocation, per-rung protocol, state.json schema
-- [Specialist skills](./.claude/skills/) — one per rung
-- [Validators](./validators/) — per-rung schema validators + shared helpers + smoke test
+- [Design document v1.2](./00_Project_Context/Agentic_Framework_Design.md) — architecture, ADRs, deferred decisions
+- [Orchestrator skill](./.claude/skills/validate-feature.md) — invocation, per-phase protocol, state.json schema
+- [Specialist skills](./.claude/skills/) — one per phase
+- [Validators](./validators/) — per-phase schema validators + shared helpers + smoke test
 - [Audit CLI](./tools/audit.py) — queries over the AI assistance log
 
 ---

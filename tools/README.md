@@ -15,12 +15,12 @@ python tools/audit.py --feature Add_Client
 python tools/audit.py --model claude-opus-4-7 --since 2026-05-01
 python tools/audit.py --reviewer shyaamlal --status approved
 python tools/audit.py --artifact 03_Add_Client/URS_Add_Client.md
-python tools/audit.py --rung feature-scoping
+python tools/audit.py --phase-name feature-scoping
 python tools/audit.py --tail 10 --format json
 python tools/audit.py --help
 ```
 
-Filters: `--feature`, `--model`, `--reviewer`, `--artifact`, `--status` (pending / approved / rejected), `--phase`, `--rung`, `--skill`, `--since`, `--until`, `--tail`. Output formats: `table` (default), `json`, `jsonl`.
+Filters: `--feature`, `--model`, `--reviewer`, `--artifact`, `--status` (pending / approved / rejected), `--phase` (number), `--phase-name` (e.g. `feature-scoping`), `--skill`, `--since`, `--until`, `--tail`. Output formats: `table` (default), `json`, `jsonl`.
 
 Demonstrates that the audit-trail story is real, not claimed (per design doc ADR-005, "Python only where it beats prompts" — structured queries over an append-only log is exactly that case).
 
@@ -30,7 +30,7 @@ Demonstrates that the audit-trail story is real, not claimed (per design doc ADR
 
 ## Traceability
 
-Per design v1.1, traceability is produced inline by the **Validation Summary Report** specialist skill (Phase 8 of the chain) and consolidated across releases by the **Release Summary** higher-order skill — not by a standalone Python tool. The Phase 0 audit's call for a `traceability.py` tool was satisfied by the agentic approach instead.
+Per design v1.2, traceability is produced inline by the **Validation Summary Report** specialist skill (Phase 8 of the chain — see §5 Traceability Matrix) and consolidated across releases by the **Release Summary** higher-order skill — not by a standalone Python tool. The Phase 0 audit's call for a `traceability.py` tool was satisfied by the agentic approach instead.
 
 If a future need arises for an out-of-band traceability matrix generator (e.g. dashboard rendering, BI export), it would belong here.
 

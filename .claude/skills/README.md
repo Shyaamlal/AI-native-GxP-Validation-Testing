@@ -1,12 +1,12 @@
 # `.claude/skills/` — Specialist Validation Agents
 
-This folder contains the Claude Code skills that make up the agentic IT GxP validation framework. Each specialist skill is one rung of the V-model methodology. The Orchestrator skill (`validate-feature`) coordinates them.
+This folder contains the Claude Code skills that make up the agentic IT GxP validation framework. Each specialist skill is one phase of the V-model methodology. The Orchestrator skill (`validate-feature`) coordinates them.
 
-**Status:** Phase 3 build in progress. Per design v1.1 — see `../../00_Project_Context/Agentic_Framework_Design.md` §6 (Specialist Agent Specifications) and §7 (Orchestrator Specification).
+**Status:** Phase 3 complete. Per design v1.2 — see `../../00_Project_Context/Agentic_Framework_Design.md` §6 (Specialist Agent Specifications) and §7 (Orchestrator Specification).
 
-## Eight-rung specialist chain
+## Eight-phase specialist chain
 
-| # | Rung | Skill file |
+| # | Phase | Skill file |
 |---|---|---|
 | 1 | Feature Scoping | `validation-feature-scoping.md` |
 | 2 | Risk Assessment | `validation-risk-assessment.md` |
@@ -23,7 +23,7 @@ This folder contains the Claude Code skills that make up the agentic IT GxP vali
 
 ## Orchestrator
 
-- `validate-feature.md` — `/validate-feature <feature-name> [--rung <rung>]`. Walks a feature through the eight-rung chain one rung at a time. Spawns specialist agents, runs schema validators, gates on human approval. See orchestrator skill itself for current scope.
+- `validate-feature.md` — `/validate-feature <feature-name> [--phase-name <phase>]`. Walks a feature through the eight-phase chain one phase at a time. Spawns specialist agents, runs schema validators, gates on human approval. See orchestrator skill itself for current scope.
 
 ## Directional isolation
 

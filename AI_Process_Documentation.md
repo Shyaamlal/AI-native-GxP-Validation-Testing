@@ -8,7 +8,7 @@
 >
 > - **YAML frontmatter on every artifact** declaring `agent_skill`, `model`, `invocation_timestamp`, `prompt_version`, and `human_review` fields (per design doc §9.1).
 > - **Append-only `ai_assistance_log.jsonl` at repo root** with one structured JSON line per agent invocation, SHA-256-anchored to the artifact content at approval time (§9.2).
-> - **Audit CLI** (`tools/audit.py`) — queries the log by feature, model, reviewer, phase, rung, skill, status, date range.
+> - **Audit CLI** (`tools/audit.py`) — queries the log by feature, model, reviewer, phase, phase-name, skill, status, date range.
 > - **Schema validators as the phase-complete gate** before the human reviews — deterministic checks that never miss (ADR-003), replacing the v1 confidence-level system (High / Medium / Low / Deferred) which relied on human judgement at every step.
 > - **GAMP 5 Category re-classification.** This framework would be GAMP Category 5 (custom application) in production, not Category 1. The Category 1 classification in this v1 document applied when AI was used as a Word-like authoring tool. The agentic framework is a custom application that itself would need qualification.
 >
