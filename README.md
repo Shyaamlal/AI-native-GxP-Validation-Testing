@@ -6,24 +6,6 @@ The framework is a portfolio piece. It demonstrates how agentic systems could au
 
 ---
 
-## Status
-
-| Phase | Description | State |
-|---|---|---|
-| 0 | Repo audit | Complete |
-| 1 | Design | Complete — see `00_Project_Context/Agentic_Framework_Design.md` v1.2 |
-| 2 | Cleanup | Complete |
-| 3 | Build agentic framework (skills + orchestrator + Python reliability layer) | Complete |
-| 4 | First end-to-end run on a real feature | Pending |
-| 5 | Substantive non-auth feature run | Pending |
-| 6 | Governance docs | Pending |
-| 7 | Polish | Pending |
-| 8 | Narrative artifacts | Pending |
-
-Validators are unit-tested via `validators/_smoke_test.py` (18 cases — valid and invalid synthetic artifacts per phase). End-to-end framework validation requires a live feature run (Phase 4).
-
----
-
 ## What this framework is
 
 - A demonstration of how agentic systems could augment IT GxP validation work
@@ -146,7 +128,7 @@ Per-phase skills, allowed upstream reads, and the state.json schema are document
 
 ## AI Assistance Record
 
-Every artifact carries YAML frontmatter declaring the agent skill, model, invocation timestamp, prompt version, and human review fields. The same information is written as a JSON line to the central `ai_assistance_log.jsonl` at each handoff, with an SHA-256 hash anchoring the audit entry to the specific artifact content at approval time.
+Every artifact carries YAML frontmatter declaring the agent skill, model, invocation timestamp, prompt version, and human review fields. The same information is written as a JSON line to the central `ai_assistance_log.jsonl` at each handoff.
 
 Query the log:
 
