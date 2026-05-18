@@ -507,6 +507,12 @@ The framework captures bugs and anomalies surfaced during OQ Execution (§4 of t
 
 Open: should the framework define an integration seam (e.g. a `bug_log.jsonl` mirroring `ai_assistance_log.jsonl`, or a per-bug markdown artifact under `<feature_folder>/bugs/`) so that mid-cycle re-validation can be audited? Worth revisiting after the first live execution surfaces bugs and the practical boundary between framework-internal and external-system-managed becomes clearer.
 
+### 11.15 Framework Packaging — Demonstration Repo vs Reusable Plugin
+
+The current repository is a demonstration *instance*: the framework (`.claude/skills/`, `validators/`, `tools/`) is portable, but it coexists with feature folders (`01_Login/`, `02_Logout/`), an application context file, and an audit log that are specific to the application under test. For a new application, the lightest pattern today is clone-and-customise (clone the repo, blank the feature folders and audit log, rewrite the application context). The framework files themselves carry no application coupling.
+
+Open: should the framework be packaged separately — as a Claude Code plugin, a pip package, or an installable skill set — so new application repositories can pull it in cleanly? Plugin packaging gives clean framework / instance separation, version pinning, and a path to a marketplace listing. Trade-off is setup overhead (a second repo to maintain, plugin distribution, version migration). Best resolved once the framework has been run against at least one second application (Phase 5) and the actually-stable surface is known. Until then, the demonstration repo serves both purposes — the framework is *visibly* portable even if not yet *packaged* portable.
+
 ---
 
 ## Appendix A — Relationship to the Existing `Methodology.md`
