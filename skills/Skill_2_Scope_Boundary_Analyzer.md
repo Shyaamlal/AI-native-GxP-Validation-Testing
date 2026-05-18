@@ -130,7 +130,7 @@ Code Investigation (Next Phase)
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md
+- Load: Application_Context.md
 - Load: Feature_Observation_[FeatureName].md
 
 **Skill Invocation:**
@@ -172,7 +172,7 @@ Use template: Feature_Boundary_Template.md
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md
+- Load: Application_Context.md
 - Load: Feature_Observation_Logout.md
 
 **Skill Invocation:**
@@ -402,7 +402,7 @@ Route protection is the NEXT system behavior (access control).
 
 **Upstream:**
 - Feature_Observation_Logout.md (source of observations)
-- Sambhava_Application_Context.md (application knowledge)
+- Application_Context.md (application knowledge)
 
 **Downstream (will use this boundary definition):**
 - Code Investigation (Skill 3)

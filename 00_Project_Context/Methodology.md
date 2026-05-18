@@ -1,6 +1,29 @@
-# Validation Methodology
+# Validation Methodology — v1 (DEPRECATED)
 
-**Purpose:** This document defines the systematic validation approach used throughout this repository. It serves as the "playbook" for AI-assisted validation work while maintaining GxP compliance.
+> **⚠️ DEPRECATED — Historical Reference Only**
+>
+> This document describes the v1 validation methodology: a 10-step retrospective workflow executed manually via Claude Web / ChatGPT, with the human as orchestrator and each phase produced by copying the relevant guide from the `Skills/` folder into a chat session.
+>
+> **Superseded by:** [`Agentic_Framework_Design.md`](Agentic_Framework_Design.md) v1.1 — the validation framework defined 2026-05-16 and reviewed 2026-05-17. The new methodology is **prospective** (not retrospective), runs as a coordinated set of 8 specialist Claude Code skills (plus an optional higher-order Release Summary skill) under an Orchestrator with Human-in-the-Loop gates, and uses a Python reliability layer for schema validation and audit trails.
+>
+> **What changed in the new methodology (v1 → v1.1):**
+> - **Code Investigation dropped** — SDET work mistakenly included in a validation-tester workflow
+> - **Verification dropped** — retrospective-validation artefact that does not apply under prospective framing
+> - **Design Specification (DS) deferred** — in computerised systems validation, configurable systems typically substitute Configuration Specifications; the chain URS → FRS (with explicit acceptance criteria per item) → OQ Protocol traces cleanly without it
+> - **Risk Assessment added** — GAMP 5 Risk-Based Approach (or organisation's chosen framework: FMEA, HACCP, equivalent) made explicit (its absence was a credibility gap)
+> - **Validation Scope made explicit** — distinct from Feature Scoping; defines what *will and will not* be validated, justified against the risk assessment
+> - **Release Summary added** — higher-order skill consolidating per-feature Validation Summary Reports for change-request / release rollups (per CAB needs)
+> - **Role-specific voice** — each artifact reflects the perspective of the role that normally produces it (URS in business-user language, FRS in systems language, OQ in QA-tester language)
+> - **HITL gate at every phase transition** — no phase advances on agent confidence alone (ADR-002)
+> - **Directional agent isolation** — each agent reads upstream artifacts only, writes its own artifact only (ADR-001)
+> - **Deterministic schema validation as the phase-complete gate** — Python validators run before the human sees the artifact (ADR-003)
+> - **AI Assistance Record dual surface** — per-artifact YAML frontmatter + append-only `ai_assistance_log.jsonl` with SHA-256 anchoring; queried via `tools/audit.py`
+>
+> **Why kept:** the evolution from this manual methodology → the agentic framework is itself part of the portfolio story. This document is the v1 snapshot, preserved for reviewers who want to see where the methodology started and how the design changed.
+
+**Original purpose (v1):** This document defines the systematic validation approach used throughout this repository. It serves as the "playbook" for AI-assisted validation work while maintaining GxP compliance.
+
+**Last Updated:** 2026-02-06 (frozen; superseded by the agentic framework v1.1 on 2026-05-17)
 
 ---
 
@@ -366,7 +389,7 @@ Test Cases (OQ) - VERIFY it works
 - Missing domain knowledge
 
 **With context:**
-- AI produces Sambhava-specific documentation
+- AI produces platform-specific documentation
 - Considers business impact and workflows
 - Applies learned patterns from previous features
 
@@ -376,7 +399,7 @@ Test Cases (OQ) - VERIFY it works
 ```
 Read 00_Project_Context\ for full context:
 - Methodology.md (this file)
-- Sambhava_Application_Context.md (application knowledge)
+- Application_Context.md (application knowledge)
 - Skills\ (accumulated patterns)
 
 Starting [Feature Name] validation...

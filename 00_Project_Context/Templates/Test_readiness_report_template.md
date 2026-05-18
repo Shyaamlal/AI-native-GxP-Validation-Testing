@@ -380,7 +380,7 @@ Significant changes to this document:
 ### Appendix B: Document Cross-References
 
 **Feature Context:**
-- Sambhava_Application_Context.md (application knowledge)
+- Application_Context.md (application knowledge)
 - Methodology.md (validation approach)
 
 **Feature Documentation:**

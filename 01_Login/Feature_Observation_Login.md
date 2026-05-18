@@ -9,7 +9,7 @@
 
 ## Observation Context
 
-**Scenario:** New validation tester joins Sambhava project. PM provides feature walkthrough showing how admin login works. This document captures observations from user perspective (black box).
+**Scenario:** New validation tester joins voice-analysis platform project. PM provides feature walkthrough showing how admin login works. This document captures observations from user perspective (black box).
 
 ---
 

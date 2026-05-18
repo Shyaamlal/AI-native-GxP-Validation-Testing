@@ -1,10 +1,10 @@
-# Sambhava Application Context
+# Voice-Analysis Platform — Application Context
 
-**Purpose:** This document provides AI tools with comprehensive knowledge about the Sambhava application to enable accurate, context-aware validation documentation.
+**Purpose:** This document provides AI tools with comprehensive knowledge about the voice-analysis platform application to enable accurate, context-aware validation documentation.
 
-**Status:** Living document - expands incrementally as features are validated  
-**Last Updated:** 2026-02-06  
-**Validated Features:** Login (complete)
+**Status:** Living document — expands incrementally as features are validated
+**Last Updated:** 2026-02-06
+**v1 artifacts in repo:** Login (`01_Login/`), Logout (`02_Logout/`). Both produced under the v1 ten-step retrospective methodology and will be regenerated through the agentic framework v1.1 in Phase 4-5 of the build plan.
 
 ---
 
@@ -26,7 +26,7 @@ This document uses explicit markers to distinguish information quality:
 
 **✅ VERIFIED (from PRD - 2026-01-31):**
 
-Sambhava is a proprietary voice analysis-based assessment tool for measuring employability skill-sets, specifically targeting people at the bottom of the pyramid (rural job seekers).
+The voice-analysis platform is a proprietary tool for measuring employability skill-sets through voice analysis, specifically targeting people at the bottom of the pyramid (rural job seekers).
 
 **Core Value Proposition:**
 - Assesses employability through voice analysis
@@ -766,11 +766,11 @@ This document grows incrementally as features are validated:
 
 **Load this file at session start:**
 ```
-Read 00_Project_Context/Sambhava_Application_Context.md for application knowledge.
+Read 00_Project_Context/Application_Context.md for application knowledge.
 ```
 
 **AI tools will:**
-- Generate Sambhava-specific requirements (not generic templates)
+- Generate platform-specific requirements (not generic templates)
 - Consider known business rules and data models
 - Reference established patterns and decisions
 - Ask relevant clarifying questions
@@ -880,7 +880,7 @@ This context document is intentionally incomplete at creation. It serves as a **
 - Maintain clear knowledge quality markers
 
 **Success Criteria:**
-- AI tools produce Sambhava-specific outputs
+- AI tools produce platform-specific outputs
 - Validation maintains consistency across features
 - Knowledge grows systematically
 - Unknowns drive investigation priorities

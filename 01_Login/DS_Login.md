@@ -424,7 +424,7 @@ This Design Specification is based on verified investigation findings:
 
 ## Notes
 
-This DS documents the as-built implementation of Admin Login feature as it currently exists in the Sambhava application. All technical claims have been verified through manual testing (see Verification_Report_Login.md).
+This DS documents the as-built implementation of Admin Login feature as it currently exists in the voice-analysis platform application. All technical claims have been verified through manual testing (see Verification_Report_Login.md).
 
 Design observations about security or architecture are documented as-is without judgment or recommendations. Risk assessment and security review are separate activities outside the scope of this technical documentation.
 

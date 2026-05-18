@@ -85,7 +85,7 @@ Code (Actual Build)
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md (business context)
+- Load: Application_Context.md (business context)
 - Load: FRS_[FeatureName].md (approved)
 - Load: Feature_Observation_[FeatureName].md
 

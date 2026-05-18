@@ -25,7 +25,7 @@ Read ALL files in 00_Project_Context/ to understand:
 ✅ Login validation package complete (8 files from Obsidian)
 
 **PENDING - Priority Order:**
-1. Sambhava_Application_Context.md (30-40 min) ← START HERE
+1. Application_Context.md (30-40 min) ← START HERE
 2. Master_Validation_Plan.md (15 min)
 3. Validation_Status_Dashboard.md (10 min)
 4. Skills/feature_boundary_skill.md (10 min)
@@ -33,9 +33,9 @@ Read ALL files in 00_Project_Context/ to understand:
 
 **TODAY'S GOAL:** Complete remaining context files, then push to GitHub.
 
-**STARTING WITH:** Sambhava_Application_Context.md
+**STARTING WITH:** Application_Context.md
 
-This is the MOST IMPORTANT context file. It transforms AI from generic to Sambhava-specific.
+This is the MOST IMPORTANT context file. It transforms AI from generic to platform-specific.
 
 Ready to create it? I'll need your input on:
 - Business rules and workflows

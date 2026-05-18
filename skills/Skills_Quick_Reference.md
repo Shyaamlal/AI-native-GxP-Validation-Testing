@@ -284,7 +284,7 @@ END: Test Execution (manual by human)
 **Templates:** `/templates/` folder  
 **Feature Docs:** `/[Feature_Number]_[Feature_Name]/` folders  
 **Methodology:** `/Methodology.md`  
-**Context:** `/Sambhava_Application_Context.md`
+**Context:** `/Application_Context.md`
 
 ---
 

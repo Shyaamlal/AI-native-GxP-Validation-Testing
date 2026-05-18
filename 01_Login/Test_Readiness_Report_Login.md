@@ -52,7 +52,7 @@ This document describes the validation approach and confirms readiness for testi
 
 ### Feature Description
 
-Admin Login enables system administrators to authenticate themselves using username and password credentials, establishing an authenticated session that grants access to administrative functionality within the Sambhava application.
+Admin Login enables system administrators to authenticate themselves using username and password credentials, establishing an authenticated session that grants access to administrative functionality within the voice-analysis platform application.
 
 ### Feature Scope
 
@@ -310,7 +310,7 @@ OQ Test Cases - 8 test cases
 
 **Prerequisites:**
 
-- ✅ Test environment identified and documented (Sambhava application)
+- ✅ Test environment identified and documented (voice-analysis platform application)
 - ✅ Test data prepared (valid: admin/password, invalid credentials)
 - ✅ Browser/tools identified
 - ✅ Evidence capture method defined (screenshots)
@@ -426,7 +426,7 @@ These are architectural/security concerns, not validation defects. Validation co
 
 **Execution Readiness:**
 
-- ✅ Tester can access test environment (Sambhava application)
+- ✅ Tester can access test environment (voice-analysis platform application)
 - ✅ Test data is available (valid/invalid credentials)
 - ✅ Evidence capture tools ready (screenshot tool)
 - ✅ Time allocated for test execution (60-90 min)
@@ -566,7 +566,7 @@ Significant changes to this document:
 ### Appendix B: Document Cross-References
 
 **Feature Context:**
-- Sambhava_Application_Context.md (application knowledge)
+- Application_Context.md (application knowledge)
 - Methodology.md (validation approach)
 
 **Feature Documentation:**

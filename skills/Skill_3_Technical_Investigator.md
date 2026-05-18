@@ -128,7 +128,7 @@ Design Specification (Skill 4)
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md
+- Load: Application_Context.md
 - Load: Feature_Observation_[FeatureName].md
 - Load: Feature_Boundary_[FeatureName].md
 
@@ -203,7 +203,7 @@ Use template: Code_Investigation_Template.md
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md  
+- Load: Application_Context.md  
 - Load: Feature_Observation_Logout.md
 - Load: Feature_Boundary_Logout.md
 

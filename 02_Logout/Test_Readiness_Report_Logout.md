@@ -359,7 +359,7 @@ OQ Test Cases - 6 test cases
 
 **Prerequisites:**
 
-- ✅ Test environment identified and documented (Sambhava application)
+- ✅ Test environment identified and documented (voice-analysis platform application)
 - ✅ Test data prepared (admin credentials for pre-login setup)
 - ✅ Browser/tools identified (Chrome/Firefox/Edge + DevTools)
 - ✅ Evidence capture method defined (screenshots, DevTools captures)
@@ -487,7 +487,7 @@ OQ Test Cases - 6 test cases
 
 **Execution Readiness:**
 
-- ✅ Tester can access test environment (Sambhava application)
+- ✅ Tester can access test environment (voice-analysis platform application)
 - ✅ Test data is available (admin credentials)
 - ✅ Evidence capture tools ready (screenshot tool, browser DevTools)
 - ✅ Time allocated for test execution (45-60 min)
@@ -636,7 +636,7 @@ Significant changes to this document:
 ### Appendix B: Document Cross-References
 
 **Feature Context:**
-- Sambhava_Application_Context.md (application knowledge)
+- Application_Context.md (application knowledge)
 - Methodology.md (validation approach)
 
 **Feature Documentation:**

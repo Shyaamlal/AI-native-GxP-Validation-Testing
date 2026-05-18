@@ -119,7 +119,7 @@ Code Investigation (Next Phase)
 ```markdown
 **Context Loading:**
 - Load: Methodology.md (validation approach)
-- Load: Sambhava_Application_Context.md (application-specific knowledge)
+- Load: Application_Context.md (application-specific knowledge)
 
 **Skill Invocation:**
 Using the Feature Observation Documenter skill, organize these raw test notes into a structured Feature Observation document.
@@ -164,7 +164,7 @@ Use template: Feature_Observation_Template.md
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md
+- Load: Application_Context.md
 
 **Skill Invocation:**
 Using the Feature Observation Documenter skill, organize these raw test notes into a structured Feature Observation document.

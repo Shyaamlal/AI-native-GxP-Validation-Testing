@@ -17,7 +17,7 @@ This User Requirements Specification defines the user-level needs for the Admin 
 
 ## Traceability
 
-**Business Need:** Secure administrative access to Sambhava system  
+**Business Need:** Secure administrative access to voice-analysis platform system  
 **Implemented By:** FRS_Login.md (Functional Requirements)  
 **Validated By:** OQ_Protocol_Login.md (Operational Qualification)
 
@@ -214,7 +214,7 @@ Administrators may work on shared or public computers, or simply want to end the
 
 **Primary Users:** System Administrators
 
-- Responsible for managing Sambhava application
+- Responsible for managing voice-analysis platform application
 - Creating and managing client accounts
 - Uploading and processing voice assessments
 - Viewing assessment results and reports
@@ -345,7 +345,7 @@ This URS serves as the foundation for validation testing (OQ Protocol) and provi
 **Drafted by:** Claude 3.5 Sonnet (Anthropic)  
 **Draft Date:** 2026-02-04  
 **Human Review:** Complete (Shyaam, 2026-02-04)  
-**Verification Method:** Business requirements verified against application context (Sambhava_Application_Context.md) and feature observations  
+**Verification Method:** Business requirements verified against application context (Application_Context.md) and feature observations  
 **Confidence Level:** High  
 **Final Accountability:** Shyaam (Validation Engineer)
 

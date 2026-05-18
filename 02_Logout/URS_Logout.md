@@ -396,7 +396,7 @@ This URS documents user-level needs for the Admin Logout feature, written from t
 
 All requirements are based on:
 - Observed system behavior (Feature_Observation_Logout.md)
-- Application context (Sambhava_PRD.md - NGO job centers, shared workstations)
+- Application context (voice-analysis platform_PRD.md - NGO job centers, shared workstations)
 - Functional capabilities (FRS_Logout.md)
 - Security and compliance needs (GDPR, access control)
 

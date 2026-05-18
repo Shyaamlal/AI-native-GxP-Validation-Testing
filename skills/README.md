@@ -1,8 +1,18 @@
-# Validation Guides
+# Validation Skills — v1 Methodology (DEPRECATED)
 
-**What's in this folder:** 8 step-by-step guides for each phase of the validation workflow
+> **⚠️ DEPRECATED — Historical Reference Only**
+>
+> This folder contains the v1 validation methodology: 8 manual, prompt-template guides used in early 2026 with Claude Web / ChatGPT. The human was the orchestrator; the guides were instructional documents copied into chat sessions.
+>
+> **Superseded by:** the agentic validation framework defined in [`00_Project_Context/Agentic_Framework_Design.md`](../00_Project_Context/Agentic_Framework_Design.md). The new framework converts these guides into a coordinated set of specialist Claude Code skills (`.claude/skills/`) orchestrated automatically, with Human-in-the-Loop gates and a Python reliability layer.
+>
+> **Why kept:** the evolution from manual prompt templates → agentic framework is itself part of the portfolio story. This folder is the v1 snapshot, preserved for reviewers who want to see where the methodology started.
+>
+> **Note:** Two steps from the v1 chain — Code Investigation (Skill 3) and Verification — have been dropped in the new methodology. Code Investigation was SDET work mistakenly included in a validation-tester workflow; Verification was a retrospective-validation artefact that does not apply under prospective framing.
 
-**Last Updated:** 2026-02-08
+**What's in this folder:** 8 step-by-step guides for each phase of the v1 retrospective validation workflow
+
+**Last Updated:** 2026-02-08 (frozen; superseded by the agentic framework 2026-05-16)
 
 ---
 
@@ -321,7 +331,7 @@ The guides are the practical application of these principles.
 - `/00_Project_Context/Methodology.md`
 
 **These guides reference application knowledge** from:
-- `/00_Project_Context/Sambhava_Application_Context.md`
+- `/00_Project_Context/Application_Context.md`
 
 **The AI process** is documented in:
 - `AI_Process_Documentation.md` (shows real examples)
@@ -401,4 +411,4 @@ The guides are the practical application of these principles.
 
 ---
 
-**End of Validation Guides README**
+**End of Validation Skills README**

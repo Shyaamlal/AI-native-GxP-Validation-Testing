@@ -1,9 +1,23 @@
-# AI Process Documentation
+# AI Process Documentation — v1 (DEPRECATED)
 
-**Purpose:** This document explains how AI tools are used within the validation workflow, including prompts, verification methods, and human decision points.
+> **⚠️ DEPRECATED — Historical Reference Only**
+>
+> This document describes the v1 mechanism for AI involvement in validation: AI as a GAMP 5 Category 1 authoring tool, used manually via Claude Web / Claude Code / ChatGPT to draft individual artifacts, with the human as orchestrator and a three-layer verification protocol (commission errors, omission errors, scope accuracy).
+>
+> **Superseded by:** the agentic framework v1.1 (see [`00_Project_Context/Agentic_Framework_Design.md`](./00_Project_Context/Agentic_Framework_Design.md)). The v1.1 AI assistance mechanism is structural rather than narrative:
+>
+> - **YAML frontmatter on every artifact** declaring `agent_skill`, `model`, `invocation_timestamp`, `prompt_version`, and `human_review` fields (per design doc §9.1).
+> - **Append-only `ai_assistance_log.jsonl` at repo root** with one structured JSON line per agent invocation, SHA-256-anchored to the artifact content at approval time (§9.2).
+> - **Audit CLI** (`tools/audit.py`) — queries the log by feature, model, reviewer, phase, rung, skill, status, date range.
+> - **Schema validators as the phase-complete gate** before the human reviews — deterministic checks that never miss (ADR-003), replacing the v1 confidence-level system (High / Medium / Low / Deferred) which relied on human judgement at every step.
+> - **GAMP 5 Category re-classification.** This framework would be GAMP Category 5 (custom application) in production, not Category 1. The Category 1 classification in this v1 document applied when AI was used as a Word-like authoring tool. The agentic framework is a custom application that itself would need qualification.
+>
+> **Why kept:** the evolution from manual AI usage → structural AI assistance records is part of the portfolio narrative. This document is the v1 snapshot, preserved for reviewers who want to see where the AI involvement story started and how it became structural.
 
-**Status:** Living document (updated as methodology evolves)  
-**Last Updated:** 2026-02-08
+**Original purpose (v1):** This document explains how AI tools are used within the validation workflow, including prompts, verification methods, and human decision points.
+
+**Status:** Frozen at v1; superseded by the agentic framework's structural AI Assistance Record (2026-05-17).
+**Last Updated:** 2026-02-08 (v1 frozen)
 
 ---
 
@@ -97,7 +111,7 @@ Please organize these observations into a Feature Observation document following
 
 **Example Prompt:**
 ```
-Based on these feature observations for Admin Logout [provides Feature_Observation_Logout.md], and knowing this application context [provides Sambhava_Application_Context.md], help me define feature boundaries.
+Based on these feature observations for Admin Logout [provides Feature_Observation_Logout.md], and knowing this application context [provides Application_Context.md], help me define feature boundaries.
 
 What should be IN SCOPE vs OUT OF SCOPE for Logout validation?
 
@@ -338,7 +352,7 @@ The system shall clear authentication state upon logout.
 
 **Example Prompt:**
 ```
-Based on these Functional Requirements [provides FRS_Logout.md] and application context [provides Sambhava_Application_Context.md], draft User Requirements (URS) for Logout.
+Based on these Functional Requirements [provides FRS_Logout.md] and application context [provides Application_Context.md], draft User Requirements (URS) for Logout.
 
 Focus on:
 - WHY users need this (business rationale)
@@ -383,7 +397,7 @@ This protects:
 - ✅ Check: Is priority appropriate for risk level?
 
 **Human Verification:**
-- Confirmed with Sambhava_Application_Context.md (NGO shared workstations)
+- Confirmed with Application_Context.md (NGO shared workstations)
 - Verified priority (Critical - prevents unauthorized PII access)
 
 **Final Confidence:** High
@@ -669,7 +683,7 @@ Each validation document includes metadata showing AI involvement:
 ### What Works Well
 
 **1. Context-First Approach**
-- Loading Methodology.md + Sambhava_Application_Context.md at session start
+- Loading Methodology.md + Application_Context.md at session start
 - AI generates application-specific (not generic) content
 - Quality improved significantly vs generic prompts
 

@@ -145,7 +145,7 @@ Functional Requirements (Skill 5)
 ```markdown
 **Context Loading:**
 - Load: Methodology.md
-- Load: Sambhava_Application_Context.md
+- Load: Application_Context.md
 - Load: Code_Investigation_[FeatureName].md (verified, HIGH confidence)
 - Load: Feature_Boundary_[FeatureName].md
 

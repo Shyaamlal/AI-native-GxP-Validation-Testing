@@ -1,6 +1,14 @@
-# Verification Report: Login Feature Investigation
+# Verification Report: Login Feature Investigation — v1 Artifact (DEPRECATED)
 
-**Purpose:** Verify accuracy of AI-generated code investigation findings before using them in validation documentation
+> **⚠️ DEPRECATED — v1 Methodology Artifact**
+>
+> This document is a Verification Report produced under the v1 retrospective methodology. Its purpose under v1 was to verify the accuracy of AI-generated code investigation findings before they fed into downstream validation artifacts.
+>
+> **Why it is now an orphan:** The agentic validation framework defined in [`00_Project_Context/Agentic_Framework_Design.md`](../00_Project_Context/Agentic_Framework_Design.md) drops both **Code Investigation** and **Verification** from the methodology. Code Investigation was SDET work mistakenly included in a validation-tester workflow; Verification existed only to confirm the Code Investigation output. Under the prospective framing of the new methodology, neither phase has a place in the validation chain.
+>
+> **Why kept:** preserved as historical evidence of the v1 retrospective workflow. Part of the portfolio narrative showing how the methodology evolved.
+
+**Purpose (v1):** Verify accuracy of AI-generated code investigation findings before using them in validation documentation
 
 **Investigation Source:** Login_Code_Investigation.md (Claude Code - 2026-02-01)
 **Verification Date:** 2026-02-02

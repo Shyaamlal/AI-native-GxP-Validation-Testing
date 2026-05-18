@@ -13,7 +13,7 @@
 
 **Test Environment:**
 - Browser: [Browser used]
-- Application: Sambhava (Vercel deployment)
+- Application: voice-analysis platform (Vercel deployment)
 - Login credentials: admin/password (successfully authenticated before testing logout)
 
 ---
@@ -265,7 +265,7 @@ These assumptions define the boundaries of this observation and will be validate
 
 ## Notes
 
-**Testing approach:** Manual black-box testing from user perspective. Screenshots used (Sambhava is demo app, no IP concerns).
+**Testing approach:** Manual black-box testing from user perspective. Screenshots used (voice-analysis platform is demo app, no IP concerns).
 
 **Testing duration:** ~10 minutes of focused observation across 5 scenarios.
 

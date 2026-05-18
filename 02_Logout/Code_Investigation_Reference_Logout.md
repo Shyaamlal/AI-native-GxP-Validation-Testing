@@ -1,4 +1,12 @@
-# Code Investigation Reference: Admin Logout
+# Code Investigation Reference: Admin Logout — v1 Artifact (DEPRECATED)
+
+> **⚠️ DEPRECATED — v1 Methodology Artifact**
+>
+> This document is a Code Investigation reference produced under the v1 retrospective methodology. Its purpose under v1 was to capture findings from reading the application code as part of building validation documentation retrospectively.
+>
+> **Why it is now an orphan:** The agentic validation framework defined in [`00_Project_Context/Agentic_Framework_Design.md`](../00_Project_Context/Agentic_Framework_Design.md) drops **Code Investigation** from the methodology entirely. Code Investigation is SDET / developer work, not validation-tester work — including it created confusion about the role being demonstrated. Under the new prospective framing, the validation chain treats the system as black/grey box throughout.
+>
+> **Why kept:** preserved as historical evidence of the v1 retrospective workflow. Part of the portfolio narrative showing how the methodology evolved.
 
 **Feature:** Admin Logout  
 **Investigation Date:** 2026-02-06  

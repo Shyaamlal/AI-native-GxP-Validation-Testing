@@ -47,7 +47,7 @@ This Operational Qualification (OQ) Test Protocol defines test cases to verify t
 
 ### Application
 
-- **Name:** Sambhava
+- **Name:** voice-analysis platform
 - **URL:** [Document actual URL]
 - **Version:** [Document version if known]
 
