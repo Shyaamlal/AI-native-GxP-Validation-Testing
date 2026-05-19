@@ -1,429 +1,119 @@
-# Functional Requirements Specification: Admin Logout Feature
-
-**Feature:** Admin Logout  
-**Derived From:** DS_Logout.md (Design Specification)  
-**Traces To:** URS_Logout.md (to be created)  
-**Date:** 2026-02-06  
-**Author:** Shyaam (Validation Engineer)  
-**Status:** Draft
-
+---
+artifact_type: FRS
+feature: Logout
+version: 1.0
+status: Approved
+ai_assistance:
+  agent_skill: validation-frs-author
+  model: claude-opus-4-7
+  invocation_timestamp: 2026-05-18T20:56:00Z
+  prompt_version: v1.0
+human_review:
+  reviewer: shyaamlal
+  approval_timestamp: 2026-05-18T21:00:13Z
+  comment: "Approved with open-question resolutions consumed by OQ Protocol (Phase 6): Q1 (timing thresholds AC-FRS-002.1, AC-FRS-006.2) accept 5-second default — no documented platform SLA. Q2 (audit timestamp tolerance AC-FRS-009.2) accept ±30-second — server clock authoritative for Sambhava. Q3 (unauthenticated response shape AC-FRS-008.1) — Laravel default is 302 redirect to /login; OQ Protocol shall assert that specifically rather than accepting any of 401/403/redirect. Q4 (audit-record discovery mechanism FRS-009) — DB query via test-env admin access; OQ Protocol to specify the precise query/path."
+traceability:
+  upstream:
+    - URS_Logout.md
 ---
 
-## Document Purpose
-
-This Functional Requirements Specification defines WHAT the Admin Logout feature does from a functional/behavioral perspective. Requirements describe system behavior without implementation details.
-
-**Granularity Note:** This FRS uses moderate-level granularity appropriate for a low-risk, simple feature. Requirements are grouped by functional area rather than broken into atomic behaviors. This approach balances traceability with documentation efficiency per risk-based validation principles.
-
----
-
-## Traceability
-
-**Implements:** URS_Logout.md (to be created)  
-**Documented in:** DS_Logout.md (completed 2026-02-06)  
-**Tested by:** OQ_Protocol_Logout.md (to be created)
-
----
-
-## Functional Requirements
-
-### FRS-LOGOUT-001: Logout UI Access
-
-**Requirement:** The system shall provide an accessible logout control on all admin pages.
-
-**Functional Behavior:**
-- Logout button/icon is present in the header
-- Header appears on all admin pages consistently
-- Logout control is always visible (sticky header)
-- Hover interaction displays "Logout" label text
-- Control is clickable/tappable
-
-**Acceptance Criteria:**
-- Logout control visible on Admin Dashboard
-- Logout control visible on Client Management page
-- Logout control visible on Client Dashboard page
-- Logout control visible on all other admin pages
-- Visual consistency across all pages (same location, same appearance)
-- Hover tooltip displays "Logout" text
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-001 (User shall be able to initiate logout)  
-**Implemented by:** DS-LOGOUT-002 (Logout Trigger UI Element), DS-LOGOUT-006 (Multi-Page Availability)  
-**Test by:** OQ-LOGOUT-001
-
----
-
-### FRS-LOGOUT-002: Logout Action Execution
-
-**Requirement:** The system shall terminate the authenticated session when logout is triggered.
-
-**Functional Behavior:**
-- Single click on logout control triggers logout
-- No confirmation dialog required (immediate action)
-- Session state transitions from authenticated to logged-out
-- Action executes without delay or loading state
-- Action completes successfully without error
-
-**Acceptance Criteria:**
-- Clicking logout control initiates logout
-- No "Are you sure?" confirmation dialog appears
-- No intermediate steps or screens
-- Session is terminated immediately
-- Logout action terminates the current session and requires re-authentication to restore access
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-001 (User shall be able to initiate logout)  
-**Implemented by:** DS-LOGOUT-001 (Session Termination Mechanism), DS-LOGOUT-004 (No Confirmation Dialog)  
-**Test by:** OQ-LOGOUT-002
-
----
-
-### FRS-LOGOUT-003: Session State Management
-
-**Requirement:** The system shall clear authentication state upon logout.
-
-**Functional Behavior:**
-- Session storage key is removed (not just modified)
-- Authenticated state changes to logged-out state
-- Session cannot be resumed without re-authentication
-- Session change persists (not temporary)
-- No session data remains after logout
-
-**Acceptance Criteria:**
-- Authentication state is fully cleared after logout
-- System does not recognize user as authenticated after logout
-- Session cannot be resumed without re-authentication
-- Session state change is permanent until next login
-- Multiple logouts do not cause errors (idempotent operation)
-
-**Implementation Note:** DS-LOGOUT-001 documents that authentication state is cleared by removing the localStorage key "isAdminLoggedIn". OQ testing may verify this implementation detail, but the functional requirement is that authentication state is cleared, regardless of mechanism.
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-002 (System shall terminate session securely)  
-**Implemented by:** DS-LOGOUT-001 (Session Termination Mechanism), DS-LOGOUT-007 (Session State Impact)  
-**Test by:** OQ-LOGOUT-003
-
----
-
-### FRS-LOGOUT-004: Post-Logout Navigation
-
-**Requirement:** The system shall navigate user to logged-out state after logout.
-
-**Functional Behavior:**
-- Immediate redirect to login page after logout
-- No manual navigation required
-- No intermediate screens or messages
-- User arrives at login page ready to re-authenticate
-- URL changes to reflect logged-out state
-
-**Acceptance Criteria:**
-- Automatic navigation occurs after logout
-- User redirected to login page
-- Login form is displayed and functional
-- User can immediately log back in if desired
-- No error messages or warnings displayed
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-003 (User shall receive logout confirmation through context)  
-**Implemented by:** DS-LOGOUT-003 (Post-Logout Navigation)  
-**Test by:** OQ-LOGOUT-004
-
----
-
-### FRS-LOGOUT-005: Access Control After Logout
-
-**Requirement:** The system shall prevent access to protected resources after logout.
-
-**Functional Behavior:**
-- Admin pages are no longer accessible after logout
-- Direct URL navigation to admin pages is blocked
-- User must re-authenticate to regain access
-- System enforces authentication requirement
-- No bypass mechanism available
-
-**Acceptance Criteria:**
-- Cannot access `/admin/dashboard` after logout
-- Cannot access client management pages after logout
-- Cannot access any admin functionality after logout
-- Direct URL navigation shows error (404 or redirect)
-- Re-login required to restore access
-
-**Note:** This requirement validates that logout successfully changes authentication state. The actual route protection mechanism (404 error display, redirect logic) is part of separate Authorization feature validation.
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-002 (System shall terminate session securely)  
-**Implemented by:** DS-LOGOUT-007 (Session State Impact)  
-**Test by:** OQ-LOGOUT-005
-
----
-
-### FRS-LOGOUT-006: No Backend Session Management
-
-**Classification:** Architectural constraint (derived requirement)
-
-**Requirement:** The system shall perform logout entirely client-side without backend API calls.
-
-**Functional Behavior:**
-- No HTTP requests sent during logout
-- No network activity during logout
-- No backend session invalidation
-- Client-side session removal is sufficient
-- Logout completes offline (no network required)
-
-**Acceptance Criteria:**
-- Zero API calls during logout action
-- Zero network requests in browser DevTools
-- Logout works without internet connection (if application loaded)
-- Session termination is instantaneous (no network latency)
-- No backend errors possible (no backend involved)
-
-**Note:** This requirement documents current architectural reality (client-side only authentication). In production medical device software, backend session invalidation would typically be required and would change this requirement.
-
-**Traces to:**  
-**User Requirement:** URS-LOGOUT-002 (System shall terminate session securely)  
-**Implemented by:** DS-LOGOUT-005 (No Backend API Call)  
-**Test by:** OQ-LOGOUT-006
-
----
-
-## Requirements Traceability Matrix
-
-| FRS ID | Functional Requirement | Traces to URS | Implemented by DS | Tested by OQ |
-|--------|------------------------|---------------|-------------------|--------------|
-| FRS-LOGOUT-001 | Logout UI Access | URS-LOGOUT-001 | DS-LOGOUT-002, DS-LOGOUT-006 | OQ-LOGOUT-001 |
-| FRS-LOGOUT-002 | Logout Action Execution | URS-LOGOUT-001 | DS-LOGOUT-001, DS-LOGOUT-004 | OQ-LOGOUT-002 |
-| FRS-LOGOUT-003 | Session State Management | URS-LOGOUT-002 | DS-LOGOUT-001, DS-LOGOUT-007 | OQ-LOGOUT-003 |
-| FRS-LOGOUT-004 | Post-Logout Navigation | URS-LOGOUT-003 | DS-LOGOUT-003 | OQ-LOGOUT-004 |
-| FRS-LOGOUT-005 | Access Control After Logout | URS-LOGOUT-002 | DS-LOGOUT-007 | OQ-LOGOUT-005 |
-| FRS-LOGOUT-006 | No Backend Session Management | URS-LOGOUT-002 | DS-LOGOUT-005 | OQ-LOGOUT-006 |
-
-**Total Functional Requirements:** 6
-
----
-
-## Requirements Coverage Analysis
-
-### Functional Areas Covered:
-
-**User Interface:** 1 requirement
-- FRS-LOGOUT-001: Logout control presence and accessibility
-
-**Action Execution:** 1 requirement
-- FRS-LOGOUT-002: Logout trigger and immediate execution
-
-**Session Management:** 2 requirements
-- FRS-LOGOUT-003: Session state clearing
-- FRS-LOGOUT-006: Client-side only architecture
-
-**Navigation & Feedback:** 1 requirement
-- FRS-LOGOUT-004: Post-logout navigation
-
-**Security/Access Control:** 1 requirement
-- FRS-LOGOUT-005: Access prevention after logout
-
-**Total Coverage:** All logout behaviors documented across 6 requirements
-
----
-
-## Granularity Rationale
-
-### Why 6 Requirements (Not 1, Not 12)?
-
-**Risk-based approach:**
-- Logout is **low-risk** feature (simple session termination)
-- Low risk supports **moderate granularity** (not atomic)
-- Each requirement covers one functional area (UI, action, session, navigation, access, architecture)
-
-**Comparison to alternatives:**
-
-**High-level (1-3 requirements):**
-- Would obscure important behaviors (session vs navigation vs access control)
-- Harder to trace to specific test cases
-- Less detailed verification
-
-**Atomic (10-15 requirements):**
-- Over-engineering for simple feature
-- Excessive documentation burden
-- No added value for low-risk functionality
-
-**Moderate (5-6 requirements) - SELECTED:**
-- ✅ Balances detail with efficiency
-- ✅ Each requirement is independently testable
-- ✅ Clear traceability without over-documentation
-- ✅ Appropriate for feature complexity and risk level
-
-**Per IEC 62304 principles:** Requirement granularity should enable independent management, testing, and development while avoiding counterproductive overhead from excessive detail.
-
----
-
-## Non-Functional Considerations
-
-**Note:** The following are documented as observations from DS, not formal NFRs:
-
-### Performance
-- Logout response: Immediate (no network latency)
-- Session check: localStorage read only (fast)
-
-### Usability
-- Single-click logout (no multi-step process)
-- Immediate feedback through navigation (implicit success)
-- Consistent placement across pages (predictable UX)
-
-### Security
-- Authentication state cleared client-side
-- No backend session to invalidate (architectural limitation)
-- Access blocked after logout (route protection enforces)
-
-**Note:** Security assessment deferred to separate security review - not part of functional validation scope.
-
----
-
-## Assumptions
-
-**Session Management:**
-1. Browser localStorage is available and functional
-2. localStorage is primary session mechanism (no cookies, tokens)
-3. Client-side session is the only session (no backend)
-4. Session removal is sufficient (no cleanup required)
-
-**User Interaction:**
-1. Single admin user (concurrent sessions not tested)
-2. Single browser window (multi-tab not addressed)
-3. Network connectivity not required for logout
-4. Standard browser behavior (no custom extensions interfering)
-
-**System Architecture:**
-5. Logout implementation consistent across all pages
-6. No middleware or interceptors affecting logout
-7. No third-party authentication services involved
-
----
-
-## Constraints
-
-### Architectural Constraints:
-1. Must use localStorage (established in Login feature)
-2. Must be client-side only (no backend available)
-3. Must work with React component architecture
-4. Must use same session key as Login ("isAdminLoggedIn")
-
-### Behavioral Constraints:
-5. No confirmation dialog (design decision)
-6. No explicit success message (navigation is implicit feedback)
-7. Single-click action (no multi-step process)
-8. Immediate execution (no loading or delay states)
-
----
-
-## Future Enhancements (Out of Current Scope)
-
-These are NOT requirements for current validation:
-
-**Confirmation Dialog:**
-- Optional "Are you sure?" before logout
-- Prevent accidental logouts
-- Warning about unsaved work
-
-**Backend Integration:**
-- Server-side session invalidation
-- Multi-device logout capability
-- Audit trail of logout events
-
-**Multi-Session Management:**
-- Logout from all tabs simultaneously
-- Session synchronization across browser contexts
-- Concurrent session handling
-
-**Enhanced Feedback:**
-- Explicit success message ("You've been logged out")
-- Logout reason tracking (user-initiated vs timeout vs forced)
-- Last logout timestamp display
-
----
-
-## Validation Test Focus
-
-FRS requirements will be validated through:
-
-**OQ (Operational Qualification):** Black-box functional testing
-- **Test Approach:** User-perspective testing (no code inspection)
-- **Test Method:** Manual test execution with evidence capture
-- **Success Criteria:** All FRS requirements verified through test execution
-
-**Test Coverage:**
-- Each FRS requirement has corresponding test case(s)
-- All acceptance criteria verified
-- Evidence captured for each test
-- Pass/fail determination documented
-
-**Reference:** OQ_Protocol_Logout.md (to be created)
-
----
-
-## Relationship to Login Feature
-
-### Complementary Functionality:
-
-**Login Feature:**
-- Creates authenticated session
-- FRS-LOGIN-003: Session creation and persistence
-- Sets localStorage key to "true"
-
-**Logout Feature:**
-- Destroys authenticated session
-- FRS-LOGOUT-003: Session state management
-- Removes localStorage key entirely
-
-### Shared Architecture:
-
-**Both features:**
-- Manipulate same session mechanism (localStorage)
-- Client-side only (no backend)
-- Immediate action (no loading states)
-- Simple implementation (minimal complexity)
-
-### Validation Strategy:
-
-- **Login:** Validates session creation and persistence
-- **Logout:** Validates session termination and cleanup
-- **Together:** Complete session lifecycle validated
-
----
-
-## Document Metadata
-
-**Author:** Shyaam  
-**Created:** 2026-02-06  
-**Status:** Portfolio Demonstration  
-**Version Control:** Git repository
-
----
-
-## Change Log
-
-Significant changes to this document:
-
-| Date | Change Rationale |
-|------|------------------|
-| 2026-02-06 | Initial FRS using moderate granularity (6 requirements) appropriate for low-risk logout feature. Risk-based approach per IEC 62304 principles. |
-
-*Note: In regulated environments, formal review/approval workflows would be managed through organizational QMS. This portfolio demonstrates validation methodology, not regulatory submission.*
-
----
-
-## Notes
-
-This FRS uses **moderate granularity** (6 requirements) rather than high-level (1-3) or atomic (10-15) approaches.
-
-**Rationale for granularity choice:**
-- Logout is low-risk, simple feature (session termination only)
-- Each requirement covers one functional area independently
-- Balances detail with documentation efficiency
-- Appropriate for feature complexity per risk-based validation
-- Demonstrates professional judgment in requirement decomposition
-
-Requirements are written from user/functional perspective without implementation details. Technical implementation is documented in DS_Logout.md.
-
-This FRS serves as the basis for creating OQ test protocols and traces back to URS (User Requirements Specification) once created.
-
-All requirements are based on actual system behavior documented in DS_Logout.md and Feature_Observation_Logout.md.
+# Functional Requirements Specification — Logout
+
+## 1. Purpose
+
+This specification states the functional behaviour the Sambhava Voice Intelligence platform shall provide to satisfy the User Requirements for the Logout feature, with explicit acceptance criteria that the OQ Protocol will translate into executable test cases.
+
+## 2. Functional Requirements
+
+### FRS-001: Sign-Out Control Presentation and Activation
+- **Statement:** The system shall present a single Sign-Out control within the user menu, accessible from every authenticated page that renders the workspace navigation, and shall activate sign-out on a single user activation of that control without requesting a confirmation step.
+- **Trace:** URS-001, URS-002, URS-011.
+- **Acceptance criteria:**
+  - **AC-FRS-001.1** — Given the user is signed in and viewing any authenticated page that renders the workspace navigation, when the user opens the user menu, then the menu contains exactly one Sign-Out control identified by an unambiguous label (e.g. "Sign out").
+  - **AC-FRS-001.2** — Given the user menu is open with the Sign-Out control visible, when the user activates the Sign-Out control once, then the system initiates sign-out immediately without presenting any intermediate confirmation dialog, modal, or additional prompt.
+  - **AC-FRS-001.3** — Given the user is signed in, when the user enumerates the authenticated routes confirmed in scope (per the pre-OQ product-owner check), then the workspace navigation containing the user menu is rendered on each such route.
+
+### FRS-002: Session Termination on Sign Out
+- **Statement:** The system shall, on activation of the Sign-Out control, end the user's authenticated session and navigate the active tab to the sign-in page.
+- **Trace:** URS-003.
+- **Acceptance criteria:**
+  - **AC-FRS-002.1** — Given the user is signed in, when the user activates the Sign-Out control, then within 5 seconds the active tab's URL changes to the sign-in URL and the sign-in form is rendered.
+  - **AC-FRS-002.2** — Given the user has activated Sign-Out and the active tab now shows the sign-in page, when the user inspects the application chrome, then no authenticated user identity is displayed on the page.
+
+### FRS-003: Removal of Authenticated User Interface After Sign Out
+- **Statement:** The system shall, on the post-sign-out page, omit the workspace navigation, the user identity indicator, and any other UI element that is rendered only for authenticated users.
+- **Trace:** URS-004.
+- **Acceptance criteria:**
+  - **AC-FRS-003.1** — Given sign-out has just completed, when the user inspects the page rendered in the active tab, then the workspace navigation (sidebar with links such as Dashboard, New Analysis, Analysis History, Users, Usage & Limits, Recording Guide) is not present in the DOM.
+  - **AC-FRS-003.2** — Given sign-out has just completed, when the user inspects the page rendered in the active tab, then the user identity area (avatar, display name, email) is not present in the DOM.
+
+### FRS-004: Protected-Route Access Rejection for Unauthenticated Requests
+- **Statement:** The system shall, for any request to a protected route originating from a client without a valid authenticated session, respond by returning the unauthenticated sign-in page in place of the requested protected content.
+- **Trace:** URS-005.
+- **Acceptance criteria:**
+  - **AC-FRS-004.1** — Given the user is not signed in, when the user navigates directly (e.g. by URL bar entry) to a protected route from the in-scope set (at minimum: `/dashboard`, `/voice/history`, `/voice/record`, `/users`, `/usage`, `/voice/report/<id>`), then the rendered page is the sign-in page and the URL displayed is the sign-in URL.
+  - **AC-FRS-004.2** — Given the user is not signed in, when the user attempts direct navigation to a protected route, then no protected content (e.g. the requested page's data table, analysis report, user list) is visible in the rendered output, even momentarily.
+
+### FRS-005: No Display of Prior-Session Content After Sign Out
+- **Statement:** The system shall not, after sign-out, render any page whose content was retrieved or generated under the prior authenticated session, except to the extent unavoidable for tabs already open at the moment of sign-out — those tabs are governed by FRS-006.
+- **Trace:** URS-006.
+- **Acceptance criteria:**
+  - **AC-FRS-005.1** — Given the user has signed out in the active tab, when the user re-issues any navigation in that tab (forward, refresh, new URL), then the rendered output is the sign-in page or another unauthenticated page; no workspace page rendered during the prior session is restored.
+  - **AC-FRS-005.2** — Given the user has signed out in the active tab and opens a new tab in the same browser, when the new tab navigates to any protected route, then the response is the sign-in page (FRS-004 applies).
+
+### FRS-006: Stale-Tab Next-Action Redirect
+- **Statement:** The system shall, in any tab that was open with rendered authenticated content at the moment sign-out occurred in another tab, reject the next user-initiated navigation or authenticated request from that tab and render the sign-in page in that tab.
+- **Trace:** URS-007.
+- **Acceptance criteria:**
+  - **AC-FRS-006.1** — Given two tabs A and B are open in the same browser context, both authenticated as the same user; Tab B is displaying a protected page with rendered data, when the user activates Sign-Out in Tab A, then Tab B continues to display its previously-rendered content (no proactive redirect is required, consistent with the approved scope disposition of Q1).
+  - **AC-FRS-006.2** — Given two tabs of the same browser context, both signed in as the same user, and sign-out has just been completed in one tab while the other tab is displaying a protected page with stale rendered content, when the user performs the next interaction in the stale tab that requires the server to serve authenticated content (e.g. clicking a navigation link, refreshing, submitting a form), then within 5 seconds the stale tab's URL changes to the sign-in URL and the sign-in page is rendered.
+  - **AC-FRS-006.3** — Given two tabs of the same browser context, both signed in as the same user, and sign-out has just been completed in one tab while the other tab is displaying a protected page with stale rendered content, when the user attempts to issue an authenticated client-to-server action from the stale tab (any in-tab action that triggers a request requiring the prior session), then the action does not succeed against the prior session's identity.
+
+### FRS-007: History-Navigation Behaviour After Sign Out
+- **Statement:** The system shall not, for any tab in which sign-out has occurred or which has been redirected to the sign-in page after sign-out, restore an authenticated view via the browser's back, forward, or history navigation.
+- **Trace:** URS-008.
+- **Acceptance criteria:**
+  - **AC-FRS-007.1** — Given the user has signed out and the active tab is on the sign-in page, when the user activates the browser's back button one or more times, then each resulting page rendered is the sign-in page (or another unauthenticated page); no protected page rendered during the prior session is restored to its authenticated form.
+  - **AC-FRS-007.2** — Given the user has signed out, the active tab is on the sign-in page, and the user has activated the browser's back button one or more times, when the user then activates the browser's forward button one or more times, then each resulting page is the sign-in page or an unauthenticated page; no protected page is restored to its authenticated form.
+
+### FRS-008: Server-Side Session Revocation
+- **Statement:** The system shall, on completion of sign-out, invalidate the server-recognised authenticated session such that any request thereafter bearing the prior session's identifiers is treated as unauthenticated.
+- **Trace:** URS-009.
+- **Acceptance criteria:**
+  - **AC-FRS-008.1** — Given a session identifier (e.g. session cookie, token, or equivalent) is captured while the user is signed in, when sign-out has completed and that identifier is subsequently presented in a request to a protected endpoint, then the server responds with an unauthenticated outcome (e.g. HTTP 401 / 403, or a redirect to the sign-in page) and does not return protected data.
+  - **AC-FRS-008.2** — Given a session identifier captured while the user was signed in is presented in a request to a protected endpoint after sign-out has completed, when the protected endpoint is one that would have returned the user's workspace data under the prior session (e.g. an endpoint backing `/voice/history` or `/voice/report/<id>`), then the response payload contains no workspace data and no identifiable subject records.
+
+### FRS-009: Audit Record on Sign Out
+- **Statement:** The system shall, on each completion of sign-out, write an audit record retrievable by an authorised reviewer that identifies the user who signed out and the time at which sign-out completed.
+- **Trace:** URS-010.
+- **Acceptance criteria:**
+  - **AC-FRS-009.1** — Given a sign-out has completed at a known time T for a known user U, when an authorised reviewer queries the system's audit log for events at or near T, then there exists a record attributable to user U with an event type identifying a sign-out (or equivalent session-end) action.
+  - **AC-FRS-009.2** — Given a sign-out audit record exists for user U at or near sign-out completion time T, when an authorised reviewer inspects the record, then it contains at minimum a user identifier corresponding to U and a timestamp whose value is within 30 seconds of T.
+  - **AC-FRS-009.3** — Given sign-out has not been performed by user U in the interval surrounding T, when the reviewer queries the audit log, then no spurious sign-out record attributable to user U exists for that interval.
+
+## 3. Functional Roles
+
+Functional roles (one level above implementation; named by responsibility, not by technology):
+
+- **Application UI** — renders the workspace navigation, user menu, Sign-Out control, and sign-in page; receives user activations and forwards them to the application layer.
+- **Session Manager** — establishes, validates, and terminates the user's authenticated session in response to sign-in and sign-out actions. Owns the contract referenced by FRS-002 and FRS-008.
+- **Authentication / Authorisation Service** — evaluates whether an incoming request bears a valid authenticated session and either permits or denies access to protected resources. Owns the contract referenced by FRS-004 and FRS-008.
+- **Route Guard** — for client-side routes, enforces unauthenticated-vs-authenticated separation and triggers redirection to the sign-in page when an unauthenticated client requests a protected route. Cooperates with Authentication / Authorisation Service. Owns the contract referenced by FRS-004 and FRS-007 in the client.
+- **Audit Logger** — receives and persists the sign-out event referenced by FRS-009; is queried by authorised reviewers.
+
+## 4. Open Questions for the Human
+
+1. **AC-FRS-002.1 / AC-FRS-006.2 timing thresholds.** A 5-second upper bound for the active-tab redirect and the stale-tab redirect is proposed as a reasonable user-experience threshold for an interactive sign-out. The systems analyst / tech lead should confirm this threshold or substitute the platform's existing service-level expectation if one is documented. The OQ Protocol depends on a concrete value.
+
+2. **AC-FRS-009.2 timestamp tolerance.** A ±30-second window for the audit timestamp is proposed to accommodate clock skew between client and server. The systems analyst should confirm this tolerance or substitute the platform's authoritative clock-sync expectation. If the audit log uses server time exclusively, the tolerance can be tightened.
+
+3. **AC-FRS-008.1 expected unauthenticated response shape.** The criterion accepts any of HTTP 401, HTTP 403, or a redirect to sign-in. The systems analyst should confirm which the platform's API is expected to return; the OQ tests will then assert specifically rather than accepting any of three outcomes.
+
+4. **FRS-009 audit-record discovery mechanism.** The acceptance criteria reference an "authorised reviewer queries the system's audit log". The systems analyst should specify the means of access (admin UI, database query, log-file inspection) so the OQ Protocol can describe a reproducible test action. The Validation Scope (A5) confirms access will be available via the test-env admin; the specific mechanism remains to be named.
+
+## 5. Notes
+
+- FRS-006 is written so that it does not impose a real-time proactive cross-tab logout obligation on the system. The product-owner disposition recorded against URS-007 (and earlier at the Validation Scope gate) treats the lazy-redirect-on-next-action contract as the intended behaviour. AC-FRS-006.1 codifies the stale-content tolerance explicitly so that a tester does not record a defect against an intended property.
+- FRS-008 deliberately uses the language "session identifiers (e.g. session cookie, token, or equivalent)" rather than naming a specific mechanism. The OQ Protocol will instantiate the AC against whatever mechanism the application uses; Open Question 3 above asks the systems analyst to name the expected response shape, which is a different decision from naming the identifier type.
+- FRS-009 splits the audit-record requirement into three ACs covering existence (.1), content (.2), and absence-of-spurious-records (.3). This gives the OQ Protocol a positive, a content-conformance, and a negative test path against the same FRS.
+- No FRS item is written for any URS item that does not exist. URS-011's no-confirmation requirement is captured inside FRS-001 (AC-FRS-001.2) rather than as a standalone FRS to keep the user-menu behaviour cohesive.

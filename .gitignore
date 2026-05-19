@@ -20,6 +20,12 @@ Thumbs.db
 *.swo
 *~
 
+# Playwright MCP session captures (per Feature Scoping §6 — session-scoped, not committed)
+.playwright-mcp/
+
+# Local Claude Code settings (per-user, not shared)
+.claude/settings.local.json
+
 # Python cache (if using Python scripts)
 __pycache__/
 *.pyc
