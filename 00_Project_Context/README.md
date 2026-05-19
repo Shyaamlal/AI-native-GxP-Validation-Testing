@@ -13,7 +13,7 @@ This folder holds the design, methodology, and application-knowledge documents t
 
 **Historical (v1, deprecated):**
 
-- **`Methodology.md`** — The original v1 ten-step retrospective methodology, manually executed via Claude Web. Frozen as a historical reference. The deprecation header at the top documents the v1 → v1.1 changes. Kept for the portfolio narrative arc — *"manual prompts in Claude Web → reusable Skills → agentic orchestrator with HITL gates."*
+- **`Methodology.md`** — The original v1 ten-step retrospective methodology, manually executed via Claude Web. Frozen as a historical reference. The deprecation header at the top documents the v1 → v1.1 changes.
 - **`Review_Notes_2026-03-19.md`** — Early-stage review notes from before the agentic pivot. Historical only.
 
 **Supporting:**

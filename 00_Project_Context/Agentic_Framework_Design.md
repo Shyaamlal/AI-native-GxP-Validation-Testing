@@ -31,25 +31,23 @@ Agents are bounded by role and by directional isolation — a **separation-of-co
 The framework is implemented using agentic LLM tooling — **Claude Code as the orchestration platform**. It is designed to be cloned, inspected, and run end-to-end by a reviewer with Claude Code installed. The Orchestrator drives an eight-phase methodology — Feature Scoping → Risk Assessment → Validation Scope → URS → FRS → OQ Protocol → OQ Execution → Validation Summary Report — with a human approval gate after every phase.
 
 **Enterprise toolchain context.** In a real deployment, requirements would flow from JIRA / Azure DevOps; OQ protocols and execution records would land in HP ALM / X-Ray / TestRail; the AI assistance log would feed enterprise audit trails. This framework does not implement those integrations — its role is to demonstrate the agent orchestration patterns those plug-in points would consume.
-## 2. Portfolio Framing — What This Is and What It Is Not
+## 2. Scope and Non-Scope
 
-This is an explicit framing because the absence of one would mislead the reader.
+**In scope:**
+- An eight-phase validation chain orchestrated as Claude Code skills, with a human approval gate after each phase
+- HITL gates, AI Assistance Records, and traceability automation across the chain
+- Per-phase Python schema validators and an audit-log query CLI
+- Worked end-to-end runs against a non-pharma web application (a stand-in for a regulated target system)
 
-**What this framework is:**
-- A demonstration of how agentic systems could augment validation work in regulated environments
-- A working prototype of HITL gates, AI Assistance Records, and traceability automation
-- A set of deliberate engineering choices about what belongs in prompts versus code
-- An artifact that can be run end-to-end on a real application (a non-pharma platform stands in for the target system)
-
-**What this framework is not:**
+**Out of scope:**
 - A production-ready GxP validation system
 - A replacement for Veeva Vault, ValGenesis, Kneat, or any controlled document system
-- Compliant on its own with 21 CFR Part 11, EU Annex 11, or GAMP 5 tool qualification requirements
+- Standalone compliance with 21 CFR Part 11, EU Annex 11, or GAMP 5 tool qualification requirements
 
 Production GxP deployment would require formal tool qualification (GAMP 5 Category 5), enterprise controlled-document hosting, and integration with regulated audit trail systems — none of which are in scope here.
 
-**Where this framework fits:**
-Agents that plug into existing validation stacks — drafting inputs for Veeva Vault, triaging deviations, cross-checking traceability matrices, pre-reviewing supplier documentation against compliance checklists. Narrow, augmentative, never touching the system of record directly. This framework prototypes the patterns those plug-in agents would use.
+**Intended fit:**
+Agents that plug into existing validation stacks — drafting inputs for Veeva Vault, triaging deviations, cross-checking traceability matrices, pre-reviewing supplier documentation against compliance checklists. Narrow, augmentative, never touching the system of record directly. This framework implements the orchestration patterns those plug-in agents would use.
 
 ## 3. Architectural Decision Records (ADRs)
 
@@ -67,7 +65,7 @@ These five decisions shape every choice in sections 4-10. Read them first to und
 
 **Decision:** The Orchestrator pauses for explicit human approval after every phase transition. No phase advances on agent confidence alone.
 
-**Rationale:** Defensible under a GAMP 5 / EU Annex 11 mindset — every AI-generated artifact receives human attestation before it is consumed downstream. Aligns with the portfolio framing that prioritises regulated rigour over pragmatic throughput. The cost is review cycles; the benefit is that no agent decision is unverified.
+**Rationale:** Defensible under a GAMP 5 / EU Annex 11 mindset — every AI-generated artifact receives human attestation before it is consumed downstream. The cost is review cycles; the benefit is that no agent decision is unverified.
 
 **Considered alternative:** Risk-classified gates (pause only at high-risk transitions). Rejected because it requires the framework to itself perform risk classification on its own outputs, which introduces a recursion the design did not want to handle.
 
@@ -85,9 +83,9 @@ These five decisions shape every choice in sections 4-10. Read them first to und
 
 ### ADR-005: Python Only Where It Beats Prompts
 
-**Decision:** Python is used for (a) artifact schema validators and (b) the audit log query CLI. Not used for orchestration UX, web services, or scaffolding around what Claude Code already does.
+**Decision:** Python is used for (a) artifact schema validators and (b) the audit log query CLI. It is not used for orchestration UX, web services, or scaffolding around capabilities Claude Code already provides.
 
-**Rationale:** A developer reviewer values deliberate choices about what belongs in prompts versus code — not the volume of code. Adding Python that wraps existing Claude Code capabilities reads as theatre. Adding Python where it provides a reliability gain a prompt cannot match (deterministic regex checks, structured queries over append-only logs) reads as engineering judgement.
+**Rationale:** Python adds value where it provides a reliability gain a prompt cannot match — deterministic regex checks against an artifact body, structured queries over an append-only log. Wrapping Claude Code's existing capabilities in Python adds maintenance cost without a reliability gain.
 
 ## 4. Architecture Overview
 
@@ -428,7 +426,7 @@ python tools/audit.py --reviewer shyaamlal --phase 7
 python tools/audit.py --artifact 03_Add_Client/URS_Add_Client.md
 ```
 
-Demonstrates the audit-trail story is real, not claimed.
+The CLI reads the on-disk JSONL only; structured filters over the append-only log are not something a prompt does deterministically.
 
 ### 10.3 What Is Out of Scope
 

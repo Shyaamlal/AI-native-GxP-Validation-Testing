@@ -12,7 +12,7 @@
 > - **Schema validators as the phase-complete gate** before the human reviews — deterministic checks that never miss (ADR-003), replacing the v1 confidence-level system (High / Medium / Low / Deferred) which relied on human judgement at every step.
 > - **GAMP 5 Category re-classification.** This framework would be GAMP Category 5 (custom application) in production, not Category 1. The Category 1 classification in this v1 document applied when AI was used as a Word-like authoring tool. The agentic framework is a custom application that itself would need qualification.
 >
-> **Why kept:** the evolution from manual AI usage → structural AI assistance records is part of the portfolio narrative. This document is the v1 snapshot, preserved for reviewers who want to see where the AI involvement story started and how it became structural.
+> **Why kept:** retained as the v1 reference for the AI involvement mechanism, so the v1 → v2 transition can be traced.
 
 **Original purpose (v1):** This document explains how AI tools are used within the validation workflow, including prompts, verification methods, and human decision points.
 

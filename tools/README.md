@@ -22,7 +22,7 @@ python tools/audit.py --help
 
 Filters: `--feature`, `--model`, `--reviewer`, `--artifact`, `--status` (pending / approved / rejected), `--phase` (number), `--phase-name` (e.g. `feature-scoping`), `--skill`, `--since`, `--until`, `--tail`. Output formats: `table` (default), `json`, `jsonl`.
 
-Demonstrates that the audit-trail story is real, not claimed (per design doc ADR-005, "Python only where it beats prompts" — structured queries over an append-only log is exactly that case).
+Per ADR-005, Python is used here because structured filters over an append-only log are not something a prompt does deterministically.
 
 **Reference:** [`../00_Project_Context/Agentic_Framework_Design.md`](../00_Project_Context/Agentic_Framework_Design.md) §9.2 (Central JSONL Audit Log) and §10 (Python Reliability Layer).
 

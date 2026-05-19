@@ -1,20 +1,19 @@
-"""Audit CLI — query the central AI Assistance Log.
+"""Audit CLI — query the AI Assistance Log.
 
 The Orchestrator writes one append-only line to `ai_assistance_log.jsonl` at the
-repo root per agent invocation (see design doc §9.2). This CLI lets reviewers
-ask structured questions over that log:
+repo root per agent invocation (see design doc §9.2). This CLI runs structured
+queries over that log:
 
-    python tools/audit.py --feature Add_Client
+    python tools/audit.py --feature Logout
     python tools/audit.py --model claude-opus-4-7 --since 2026-05-01
     python tools/audit.py --reviewer shyaamlal --phase 7
-    python tools/audit.py --artifact 03_Add_Client/URS_Add_Client.md
+    python tools/audit.py --artifact 02_Logout/URS_Logout.md
     python tools/audit.py --status rejected
     python tools/audit.py --since 2026-05-01 --format json
     python tools/audit.py --tail 10
 
-Demonstrates the audit-trail story is real, not claimed (design ADR-005,
-"Python only where it beats prompts" — structured queries over an append-only
-log is exactly that case).
+Per ADR-005, Python is used here because structured queries over an append-only
+log are not something a prompt does deterministically.
 """
 
 from __future__ import annotations
@@ -59,11 +58,11 @@ def _matches(entry: dict, args: argparse.Namespace) -> bool:
         return False
     if args.model and entry.get("model") != args.model:
         return False
-    if args.reviewer and entry.get("human_reviewer") != args.reviewer:
+    if args.reviewer and entry.get("reviewer") != args.reviewer:
         return False
     if args.artifact and entry.get("artifact_path") != args.artifact:
         return False
-    if args.status and entry.get("human_approval") != args.status:
+    if args.status and entry.get("approval") != args.status:
         return False
     if args.phase is not None and entry.get("phase") != args.phase:
         return False
@@ -109,8 +108,8 @@ def _render_table(entries: Iterable[dict]) -> str:
                 str(e.get("agent_skill", "")),
                 str(e.get("model", "")),
                 str(e.get("schema_result", "")),
-                str(e.get("human_approval", "")),
-                str(e.get("human_reviewer", "") or ""),
+                str(e.get("approval", "")),
+                str(e.get("reviewer", "") or ""),
             ]
         )
 
@@ -131,7 +130,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--log", type=Path, default=DEFAULT_LOG_PATH, help="Path to ai_assistance_log.jsonl")
     parser.add_argument("--feature", help="Filter by feature name")
     parser.add_argument("--model", help="Filter by model identifier")
-    parser.add_argument("--reviewer", help="Filter by human_reviewer")
+    parser.add_argument("--reviewer", help="Filter by reviewer")
     parser.add_argument("--artifact", help="Filter by exact artifact_path")
     parser.add_argument("--status", choices=["pending", "approved", "rejected"], help="Filter by approval status")
     parser.add_argument("--phase", type=int, help="Filter by phase number (1-8)")

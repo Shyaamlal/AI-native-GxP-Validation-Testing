@@ -1,6 +1,6 @@
 ---
 name: validate-feature
-description: Orchestrator for the agentic IT GxP validation framework. Walks a feature through the eight-phase V-model methodology one phase at a time, spawning specialist agents, running schema validators, and gating on reviewer approval at every phase transition. Invoke as `/validate-feature <feature-name>` to run the full chain, `/validate-feature <feature-name> --phase <phase-name>` to run a single phase, `/validate-feature <feature-name> --status` to report current state, or `/validate-feature <feature-name> --resume` to continue from the last unapproved phase.
+description: Orchestrator for the agentic IT GxP validation framework. Walks a feature through the eight-phase V-model methodology one phase at a time, spawning specialist agents, running schema validators, and gating on reviewer approval at every phase transition. Invoke by asking Claude Code to validate a feature (e.g. "Validate the Logout feature", "Resume the validation chain for Logout", "Show the validation status for Logout", or "Run only the OQ Protocol phase for Logout").
 ---
 
 # Validate Feature — Orchestrator
@@ -9,10 +9,14 @@ You are the Orchestrator of the agentic IT GxP validation framework. You do not 
 
 ## Invocation forms
 
-- `/validate-feature <feature-name>` — runs the full eight-phase chain from current position. Reads `state.json` if present; starts at phase 1 if not.
-- `/validate-feature <feature-name> --phase <phase-name>` — runs a single phase explicitly.
-- `/validate-feature <feature-name> --status` — reads `state.json` and reports the current phase, last approval, and next action. No agent spawned, no artifact written. Use for "where are we?" between sessions.
-- `/validate-feature <feature-name> --resume` — explicitly resumes from the last unapproved phase in `state.json`.
+This skill is invoked in natural language. Recognise these intents and resolve them to the corresponding mode:
+
+| Reviewer intent (example phrasing) | Mode |
+|---|---|
+| "Validate the `<feature>` feature" / "Run validation for `<feature>`" | Full chain. Read `state.json` if present; start at phase 1 if not. |
+| "Run only phase `<phase-name>` for `<feature>`" | Single phase. |
+| "Show the validation status for `<feature>`" / "Where are we on `<feature>`?" | Status mode. Read `state.json`, report current phase + last approval. No agent spawned, no artifact written. |
+| "Resume the validation chain for `<feature>`" | Resume from the last unapproved phase in `state.json`. |
 
 The conceptual model is V-model traversal — Feature Scoping, Risk Assessment, and Validation Scope are pre-V bounding activities; URS / FRS descend the specification arm; OQ Protocol / OQ Execution sit on the right (verification) arm; the Validation Summary Report climbs back to the top. Each step is one "phase" in this skill's vocabulary and in the technical surfaces (`state.json`, `phase_complete` signal, validator file names).
 
@@ -193,7 +197,7 @@ Append phases as they complete; never delete or rewrite prior phase entries.
 
 ## Resume behaviour
 
-On `--resume` (or any invocation where `state.json` exists with `current_phase < 8`):
+On a resume request (or any invocation where `state.json` exists with `current_phase < 8`):
 1. Read `state.json`
 2. Identify the last unapproved phase (`current_phase` field, or the first phase in the array without `approval.approved: true`)
 3. Begin per-phase protocol from Step 1 at that phase
@@ -203,7 +207,7 @@ Within-phase interruption (the reviewer stops mid-agent-execution) is not curren
 
 ## Status mode
 
-On `--status`: read `state.json`, print a concise summary, exit. Do not spawn any agent. Do not write any artifact.
+On a status request: read `state.json`, print a concise summary, exit. Do not spawn any agent. Do not write any artifact.
 
 Format:
 ```
@@ -222,7 +226,7 @@ Phases:
   [ ] 7. oq-execution
   [ ] 8. summary-report
 
-Next action: resume validation-scope. Run /validate-feature <FeatureName> --resume.
+Next action: resume validation-scope. Ask Claude Code: "Resume the validation chain for <FeatureName>".
 ```
 
 ## Hard rules

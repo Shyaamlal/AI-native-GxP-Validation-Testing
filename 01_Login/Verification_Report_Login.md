@@ -6,7 +6,7 @@
 >
 > **Why it is now an orphan:** The agentic validation framework defined in [`00_Project_Context/Agentic_Framework_Design.md`](../00_Project_Context/Agentic_Framework_Design.md) drops both **Code Investigation** and **Verification** from the methodology. Code Investigation was SDET work mistakenly included in a validation-tester workflow; Verification existed only to confirm the Code Investigation output. Under the prospective framing of the new methodology, neither phase has a place in the validation chain.
 >
-> **Why kept:** preserved as historical evidence of the v1 retrospective workflow. Part of the portfolio narrative showing how the methodology evolved.
+> **Why kept:** preserved as a v1 reference so the v1 → v2 methodology change is traceable.
 
 **Purpose (v1):** Verify accuracy of AI-generated code investigation findings before using them in validation documentation
 
