@@ -1,7 +1,7 @@
 ---
 title: Agentic Validation Framework — Design Document
 version: 1.2
-status: Reviewed — ready for build (Phase 3 complete; Phase 4 next)
+status: Phase 4 complete — first end-to-end agentic run on Logout (2026-05-18); validation_status Conditional Pass
 date: 2026-05-17
 author: Shyaamlal Nandalal
 ai_assistance: |
