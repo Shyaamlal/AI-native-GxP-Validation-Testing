@@ -20,7 +20,7 @@ traceability:
 
 ## 1. Feature Identity
 - **Feature name:** Logout
-- **System under test:** Sambhava Voice Intelligence platform, https://sambhava.neurapses.dev
+- **System under test:** multi-role web platform (test environment)
 - **Environment classification:** non-validated (DEV / QA / pre-production)
 - **Access method:** browser via Playwright MCP (Chromium)
 - **Observer date:** 2026-05-18
@@ -32,7 +32,7 @@ traceability:
 - **User action(s):**
   1. From any authenticated page (observed entry point: `/dashboard`), click the user identity button at the bottom of the left sidebar (displays the user's initials, display name, and email address).
   2. In the dropdown that opens above the button, click **Sign out**.
-- **System response:** The current tab navigates to `/login`. The authenticated chrome (sidebar with workspace navigation, user identity button, content area) is no longer rendered; the login form is rendered instead. The page title remains `Sambhava`.
+- **System response:** The current tab navigates to `/login`. The authenticated chrome (sidebar with workspace navigation, user identity button, content area) is no longer rendered; the login form is rendered instead. The page title remains the application's product name.
 - **Visual feedback:** The dropdown closes; the route changes; the login layout replaces the workspace layout. No intermediate confirmation dialog, no toast or success message, no loading spinner observed.
 - **Behavioural outcome:** The session is terminated. Subsequent attempts to reach protected routes (in this tab or in other open tabs of the same browser context) redirect to `/login` — see 2.3 and 2.4.
 
@@ -115,7 +115,7 @@ No logout-specific confirmation dialog, toast, banner, badge, or session-timeout
 
 ## 6. Observation Notes
 
-- Observation was performed via Playwright MCP driving a Chromium browser instance against `https://sambhava.neurapses.dev`. The account used was a Client-Workspace test account (`Test Client 1`); credentials are not recorded here.
+- Observation was performed via Playwright MCP driving a Chromium browser instance against the test-environment URL. The account used was a Client-Workspace test account (`Test Client 1`); credentials are not recorded here.
 - Two tabs were used for cross-tab observation (2.4). Both tabs belonged to the same browser context, so they shared cookies / storage with the application origin.
 - No interactive element opened a confirmation dialog before logging out; `Sign out` is single-click destructive of session state. This is recorded as observation, not as judgement.
 - Screenshots and accessibility snapshots captured by Playwright MCP during the session reside under `.playwright-mcp/` in the working directory. They are session-scoped and not committed to the repository.

@@ -8,7 +8,7 @@
 ```
 Continuing AI-native validation portfolio work.
 
-**Working Directory:** C:\Users\motic\sambhava-validation-portfolio
+**Working Directory:** C:\path\to\your\validation-portfolio
 
 **LOAD CONTEXT:**
 Read ALL files in 00_Project_Context/ to understand:

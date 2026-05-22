@@ -173,7 +173,7 @@ Using the Feature Observation Documenter skill, organize these raw test notes in
 - Feature Name: Admin Logout
 - Test Date: 2026-02-06
 - Tester: Shyaam
-- Test Environment: Chrome v120, macOS, Production (sambhava.org)
+- Test Environment: Chrome v120, macOS, Production (example.com)
 
 **Raw Testing Notes:**
 - logout button in header on right side
@@ -225,7 +225,7 @@ Use template: Feature_Observation_Template.md
 **Test Environment:**
 - Browser: Chrome v120
 - Operating System: macOS
-- System: Production (sambhava.org)
+- System: Production (example.com)
 - Testing Method: Manual black-box testing
 
 ---
@@ -440,7 +440,7 @@ After AI generates Feature Observation document using this skill:
 **Why bad:** Doesn't specify WHAT error message
 
 **Good:**
-> "Browser alert displays: 'sambhava.org says Invalid credentials. Use username: admin, password: password'"
+> "Browser alert displays: 'example.com says Invalid credentials. Use username: admin, password: password'"
 
 **Fix:** Include exact text, UI elements, navigation targets
 

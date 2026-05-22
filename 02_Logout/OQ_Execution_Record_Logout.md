@@ -11,14 +11,14 @@ ai_assistance:
 human_review:
   reviewer: shyaamlal
   approval_timestamp: 2026-05-18T21:49:41Z
-  comment: "Approved. Execution record accurately reflects the run. Four open questions carry forward to Phase 8 as inputs to validation_status determination: (1) external evidence for relocated ACs 006.3/008.1/008.2 — likely not available for this dog-food, gap to be documented in Summary; (2) platform SLO documentation for timing thresholds 002.1/006.2 — not formalised for Sambhava, gap to be documented; (3) audit-DB access for TC-019/020/021 — committed as pre-deployment coordination item; (4) Phase 3 over-scoping — carried as framework-improvement item, not a Logout defect. Expected Phase 8 outcome: Conditional Pass — functional behaviour verified (15 PASS, 0 FAIL); gaps in external evidence, SLO docs, and audit-DB access conditions. The Logout feature itself shows no defects; conditional disposition reflects gaps in the surrounding validation package, not in the feature."
+  comment: "Approved. Execution record accurately reflects the run. Four open questions carry forward to Phase 8 as inputs to validation_status determination: (1) external evidence for relocated ACs 006.3/008.1/008.2 — likely not available for this dog-food, gap to be documented in Summary; (2) platform SLO documentation for timing thresholds 002.1/006.2 — not formalised for the platform, gap to be documented; (3) audit-DB access for TC-019/020/021 — committed as pre-deployment coordination item; (4) Phase 3 over-scoping — carried as framework-improvement item, not a Logout defect. Expected Phase 8 outcome: Conditional Pass — functional behaviour verified (15 PASS, 0 FAIL); gaps in external evidence, SLO docs, and audit-DB access conditions. The Logout feature itself shows no defects; conditional disposition reflects gaps in the surrounding validation package, not in the feature."
 traceability:
   upstream:
     - OQ_Protocol_Logout.md
 execution_context:
   mode: human-record-consumed
   executor: shyaamlal
-  environment_url: https://sambhava.neurapses.dev
+  environment_url: https://test-env.example
   execution_start: 2026-05-18T20:50:00Z
   execution_end: 2026-05-18T21:30:00Z
 ---
@@ -33,7 +33,7 @@ execution_context:
 - **Scope-Revised (not executed in OQ; coverage relocated):** 3 — TC-014, TC-017, TC-018
 - **Blocked:** 3 — TC-019, TC-020, TC-021
 
-The execution was conducted in human-record-consumed mode against the live system at `https://sambhava.neurapses.dev` by the executor `shyaamlal`. The execution was performed following a senior-QA-consolidated parallel protocol (`OQ_Protocol_Logout_Consolidated.md` v1.1) which re-organised the canonical 21 test cases into two consolidated functional cases (TC-A, TC-B). This record maps results back to the canonical 21 TC IDs from the approved `OQ_Protocol_Logout.md` v1.0 for traceability; the consolidation is recorded as a deviation in §3.
+The execution was conducted in human-record-consumed mode against the live system at `https://test-env.example` by the executor `shyaamlal`. The execution was performed following a senior-QA-consolidated parallel protocol (`OQ_Protocol_Logout_Consolidated.md` v1.1) which re-organised the canonical 21 test cases into two consolidated functional cases (TC-A, TC-B). This record maps results back to the canonical 21 TC IDs from the approved `OQ_Protocol_Logout.md` v1.0 for traceability; the consolidation is recorded as a deviation in §3.
 
 ## 2. Test Case Results
 
@@ -72,7 +72,7 @@ The execution was conducted in human-record-consumed mode against the live syste
 ### TC-004: Active tab redirects to sign-in page within 5 seconds
 - **Trace:** AC-FRS-002.1
 - **Steps executed:** Protocol step 1, 3, 4 executed as written. Protocol step 2 (start stopwatch / note t0) and the elapsed-time portion of step 4 were not executed — see Deviations.
-- **Actual result:** The active tab's URL changed to `https://sambhava.neurapses.dev/login` and the sign-in form was rendered. Functional assertion satisfied. Timing component not asserted in this OQ execution.
+- **Actual result:** The active tab's URL changed to `https://test-env.example/login` and the sign-in form was rendered. Functional assertion satisfied. Timing component not asserted in this OQ execution.
 - **Pass / Fail / Blocked:** Pass (functional component only). The timing assertion ("≤ 5 seconds") is recorded as scope-revised — see §3.
 - **Evidence:** Covered by Consolidated TC-A Step 3.
 - **Deviations:** Timing assertion not executed in OQ. The senior validation lead re-categorised the "within 5 seconds" portion as performance/SLO scope, out of OQ scope for this run. See §3 and §5 Open Question 2.
@@ -80,7 +80,7 @@ The execution was conducted in human-record-consumed mode against the live syste
 ### TC-005: No authenticated identity displayed after sign-out
 - **Trace:** AC-FRS-002.2
 - **Steps executed:** Protocol steps 1-2 executed as written, within Consolidated TC-A Step 4.
-- **Actual result:** No authenticated identifier visible on the post-sign-out page. Searched identifier match counts (each expected 0): `testclient@sambhava.test` = 0; `Test Client 1` = 0; "TC" avatar = 0.
+- **Actual result:** No authenticated identifier visible on the post-sign-out page. Searched identifier match counts (each expected 0): `testclient@platform.test` = 0; `Test Client 1` = 0; "TC" avatar = 0.
 - **Pass / Fail / Blocked:** Pass
 - **Evidence:** Covered by Consolidated TC-A Step 4.
 - **Deviations:** None.
@@ -96,7 +96,7 @@ The execution was conducted in human-record-consumed mode against the live syste
 ### TC-007: User identity area absent from DOM after sign-out
 - **Trace:** AC-FRS-003.2
 - **Steps executed:** Protocol steps 1-2 executed as written, within Consolidated TC-A Step 4.
-- **Actual result:** User identity area absent. DOM-search match counts (each expected 0): "TC" avatar = 0; "Test Client 1" = 0; `testclient@sambhava.test` = 0.
+- **Actual result:** User identity area absent. DOM-search match counts (each expected 0): "TC" avatar = 0; "Test Client 1" = 0; `testclient@platform.test` = 0.
 - **Pass / Fail / Blocked:** Pass
 - **Evidence:** Covered by Consolidated TC-A Step 4.
 - **Deviations:** Verification performed by visual inspection. Outcome unchanged.
@@ -136,7 +136,7 @@ The execution was conducted in human-record-consumed mode against the live syste
 ### TC-012: Stale tab retains rendered content after sign-out elsewhere (no proactive redirect)
 - **Trace:** AC-FRS-006.1
 - **Steps executed:** Protocol steps 1-3 executed as written, within Consolidated TC-B Step 1.
-- **Actual result:** Tab B retained its rendered `/voice/history` view, including the analyses table, throughout the 30-second observation window. URL at end of window: `https://sambhava.neurapses.dev/voice/history`. Analyses table still visible: yes.
+- **Actual result:** Tab B retained its rendered `/voice/history` view, including the analyses table, throughout the 30-second observation window. URL at end of window: `https://test-env.example/voice/history`. Analyses table still visible: yes.
 - **Pass / Fail / Blocked:** Pass
 - **Evidence:** Covered by Consolidated TC-B Step 1.
 - **Deviations:** None.

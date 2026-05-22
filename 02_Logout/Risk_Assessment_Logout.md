@@ -25,7 +25,7 @@ risk_classification:
 ## 1. Framework Applied
 
 - **Framework:** GAMP 5 Risk-Based Approach.
-- **Selection rationale:** Default selection per the framework skill — organisation-specific framework can be substituted in the prompt. Sambhava is a bespoke web application (Voice Intelligence platform), which the GAMP 5 decision tree classifies as a Category 5 custom application. Feature-level risk is assessed within that overall Category 5 system context.
+- **Selection rationale:** Default selection per the framework skill — organisation-specific framework can be substituted in the prompt. The system under test is a bespoke multi-role web platform, which the GAMP 5 decision tree classifies as a Category 5 custom application. Feature-level risk is assessed within that overall Category 5 system context.
 - **CR-level inheritance:** Not applied. This feature is assessed standalone; no change-request-level classification has been carried in.
 
 ## 2. GxP Impact Assessment
@@ -86,13 +86,13 @@ risk_classification:
 *Risks that could not be classified confidently from the Feature Scoping artifact alone.*
 
 1. **Intended use of the platform's outputs.** Are voice-analysis reports used to inform clinical, occupational-health, or fitness-for-role decisions about identifiable individuals (Medium patient-safety severity), or are they limited to non-clinical workforce/educational assessment (Low severity)? This determines whether the §3 indirect patient-safety pathway is in scope. The validation lead must confirm with the product owner / regulatory affairs.
-2. **Regulatory framework declaration for the platform.** Has Sambhava been formally classified as a 21 CFR Part 11 system, an EU Annex 11 system, both, or neither, for the regulated activity this client is performing? The §2 obligations cited above presume Part 11 + Annex 11 apply. If the platform is operated outside these jurisdictions / regulated processes, the GxP impact framing changes.
+2. **Regulatory framework declaration for the platform.** Has the platform been formally classified as a 21 CFR Part 11 system, an EU Annex 11 system, both, or neither, for the regulated activity this client is performing? The §2 obligations cited above presume Part 11 + Annex 11 apply. If the platform is operated outside these jurisdictions / regulated processes, the GxP impact framing changes.
 3. **Existence and scope of prior security review.** Has the session-management implementation (including logout) already been subject to an org-level security review or penetration test? If so, that evidence is referenceable in Validation Scope; if not, the validation lead should consider whether to commission one before relying solely on OQ.
 4. **Multi-role / multi-workspace logout variants.** The Feature Scoping artifact (Q6) records that only the Client role of one workspace was observed. If higher-privilege roles (admin, workspace owner) exist with different sidebars or logout placement, their risk profile may differ and should be assessed before Validation Scope closes.
 5. **SSO / federated-identity integration.** Is the logout observed a local application logout only, or does it propagate to an upstream identity provider (SSO single-sign-out)? If SSO is in use, "logout" has a broader contract than the Feature Scoping artifact could observe end-to-end, and the risk surface extends to IdP behaviour.
 
 ## 8. Notes
 
-- This assessment treats Sambhava as a GAMP 5 custom application based on the bespoke nature of the platform observable from the Feature Scoping artifact. If the platform is in fact a configured deployment of a third-party product (Category 4) or is GAMP-out-of-scope for this client, the validation lead must override this classification.
+- This assessment treats the platform as a GAMP 5 custom application based on its bespoke nature observable from the Feature Scoping artifact. If the platform is in fact a configured deployment of a third-party product (Category 4) or is GAMP-out-of-scope for this client, the validation lead must override this classification.
 - The assessment is bounded by what Phase 1 observed. Implementation-level questions (server-side session revocation, audit emission, in-flight handling, SSO) are explicitly raised as Open Questions or as OQ-Protocol-targeted risks rather than assumed away.
 - No mitigations are prescribed here. Mitigations live in the FRS acceptance criteria (Phase 5) and the OQ Protocol (Phase 6), per the framework's separation of concerns.

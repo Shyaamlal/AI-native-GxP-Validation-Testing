@@ -22,7 +22,7 @@ traceability:
 
 ## 1. Purpose
 
-This specification states the user requirements for the Logout feature of the Sambhava Voice Intelligence platform: the user needs the ability to end their authenticated session on demand and to be assured that, once they have done so, no further access to their workspace is available to them or to a subsequent user of the same browser without re-authentication.
+This specification states the user requirements for the Logout feature of the multi-role web platform: the user needs the ability to end their authenticated session on demand and to be assured that, once they have done so, no further access to their workspace is available to them or to a subsequent user of the same browser without re-authentication.
 
 ## 2. Scope Reference
 

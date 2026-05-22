@@ -78,7 +78,7 @@ setTimeout( () => {
             s(!1)
 
 **Evidence:**
-[File: src/components/AdminLogin.tsx (or wherever you found it)](https://www.sambhava.org/assets/index-HCFffnbd.js)  
+[File: src/components/AdminLogin.tsx (or wherever you found it)](https://[redacted]/assets/index-HCFffnbd.js)  
 Format: Plain text string comparison
 
 **Conclusion:** ✅ Verified

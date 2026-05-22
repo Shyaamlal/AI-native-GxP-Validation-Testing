@@ -22,12 +22,12 @@ traceability:
 
 ## 1. Purpose
 
-This protocol specifies the test cases that, when executed in the non-validated test environment, verify that every acceptance criterion in `FRS_Logout.md` is met, thereby demonstrating conformance of the Sambhava Logout feature to its approved URS and FRS.
+This protocol specifies the test cases that, when executed in the non-validated test environment, verify that every acceptance criterion in `FRS_Logout.md` is met, thereby demonstrating conformance of the platform's Logout feature to its approved URS and FRS.
 
 ## 2. Test Environment Requirements
 
-- **System under test:** Sambhava Voice Intelligence platform, `https://sambhava.neurapses.dev`.
-- **Required role(s):** One Client-role test account in the Client Workspace (e.g. `testclient@sambhava.test`). The same account is reused across all test cases unless a test case notes otherwise.
+- **System under test:** multi-role web platform (test environment), `https://test-env.example`.
+- **Required role(s):** One Client-role test account in the Client Workspace (e.g. `testclient@platform.test`). The same account is reused across all test cases unless a test case notes otherwise.
 - **Test data prerequisites:** The Client account is enrolled in the workspace with at least one prior analysis record visible on `/voice/history` (so that the protected-content non-disclosure tests can assert against real data). The protocol does not create or modify test data; if the data prerequisites are not satisfied, the tester surfaces a blocker before execution.
 - **Browser / tool requirements:** Chromium-family browser at a current stable version. Where the test case calls for network capture or replay (TC-017, TC-018), an HTTP-capture tool (browser DevTools Network panel, or equivalent — `curl` with the captured cookie value, or Playwright's `request` API) is required.
 - **Audit-log access:** Per the approved Validation Scope (A5) and the FRS approval resolution to Q4, audit-record discovery is performed by direct database query in the test environment. The tester must have, before execution, a documented database connection string and credentials (handled out-of-band; not recorded in this protocol) and the name of the audit-event table or view that records authentication events. If the table/view name is unknown at execution time, TC-019, TC-020, and TC-021 are blocked.
@@ -73,7 +73,7 @@ This protocol specifies the test cases that, when executed in the non-validated 
   2. Start a stopwatch (or note `t0` in milliseconds).
   3. Click the "Sign out" button.
   4. Observe the URL bar and the rendered page until the URL settles on the sign-in URL and the sign-in form is fully rendered. Record the elapsed time `t1 - t0`.
-- **Expected result:** The active tab's URL changes to `https://sambhava.neurapses.dev/login` (the sign-in URL) and the sign-in form is rendered. The elapsed time `t1 - t0` is ≤ 5 seconds.
+- **Expected result:** The active tab's URL changes to `https://test-env.example/login` (the sign-in URL) and the sign-in form is rendered. The elapsed time `t1 - t0` is ≤ 5 seconds.
 - **Pass criteria:** Final URL equals the sign-in URL AND sign-in form is rendered AND elapsed time ≤ 5 seconds.
 
 ### TC-005: No authenticated identity is displayed after sign-out
@@ -81,9 +81,9 @@ This protocol specifies the test cases that, when executed in the non-validated 
 - **Preconditions:** TC-004 has just passed in the same tab; the active tab is on the sign-in page.
 - **Steps:**
   1. Inspect the rendered page (sign-in form area, header, footer, and any chrome).
-  2. Search the visible text and the DOM for the test account's email address (`testclient@sambhava.test`), display name ("Test Client 1"), and initials avatar ("TC").
+  2. Search the visible text and the DOM for the test account's email address (`testclient@platform.test`), display name ("Test Client 1"), and initials avatar ("TC").
 - **Expected result:** None of these identifiers is present anywhere on the post-sign-out page.
-- **Pass criteria:** Search for each of `testclient@sambhava.test`, `Test Client 1`, and the "TC" avatar in the visible text and DOM returns zero matches.
+- **Pass criteria:** Search for each of `testclient@platform.test`, `Test Client 1`, and the "TC" avatar in the visible text and DOM returns zero matches.
 
 ### TC-006: Workspace navigation is absent from the DOM after sign-out
 - **Trace:** AC-FRS-003.1.
@@ -99,15 +99,15 @@ This protocol specifies the test cases that, when executed in the non-validated 
 - **Preconditions:** TC-004 has just passed; the active tab is on the sign-in page.
 - **Steps:**
   1. Open the browser's DOM inspector on the post-sign-out page.
-  2. Search the DOM for the avatar element ("TC"), the display name ("Test Client 1"), and the email (`testclient@sambhava.test`) anywhere in the document.
+  2. Search the DOM for the avatar element ("TC"), the display name ("Test Client 1"), and the email (`testclient@platform.test`) anywhere in the document.
 - **Expected result:** No element representing the user-identity area is present in the DOM.
 - **Pass criteria:** Each of the three identifiers returns zero matches in the post-sign-out DOM.
 
 ### TC-008: Direct navigation to a protected route while signed out redirects to sign-in
 - **Trace:** AC-FRS-004.1.
-- **Preconditions:** The browser has no active Sambhava session (cookies cleared, or sign-out completed in this browser context).
+- **Preconditions:** The browser has no active platform session (cookies cleared, or sign-out completed in this browser context).
 - **Steps:**
-  1. In the URL bar, enter `https://sambhava.neurapses.dev/dashboard` and submit.
+  1. In the URL bar, enter `https://test-env.example/dashboard` and submit.
   2. Wait for the page to settle.
   3. Inspect the URL bar and the rendered content.
   4. Repeat steps 1-3 for each of `/voice/history`, `/voice/record`, `/users`, `/usage`, and one `/voice/report/<id>` URL whose id matches an existing report.
@@ -119,7 +119,7 @@ This protocol specifies the test cases that, when executed in the non-validated 
 - **Preconditions:** Same as TC-008.
 - **Steps:**
   1. Begin a browser-DevTools recording (Network and Performance panels) before submitting the URL.
-  2. In the URL bar, enter `https://sambhava.neurapses.dev/voice/history` and submit.
+  2. In the URL bar, enter `https://test-env.example/voice/history` and submit.
   3. Review the rendered output and any intermediate paint frames (DevTools Performance recording) for the appearance of protected content — specifically, the analysis-history table headers ("Subject", "Owner", "Gender", "DOB", "Date", "Status", "Actions") or any subject name from the test workspace.
   4. Repeat for `/dashboard` (looking for "Good afternoon", "My Users", "Analyses" tiles).
 - **Expected result:** No frame in the rendered output or the Performance recording contains the listed protected-content markers.
@@ -140,7 +140,7 @@ This protocol specifies the test cases that, when executed in the non-validated 
 - **Preconditions:** TC-004 has just passed in the original tab; the browser context is otherwise unchanged.
 - **Steps:**
   1. Open a new tab in the same browser context (Ctrl+T or equivalent).
-  2. In the new tab's URL bar, enter `https://sambhava.neurapses.dev/dashboard` and submit.
+  2. In the new tab's URL bar, enter `https://test-env.example/dashboard` and submit.
   3. Inspect the rendered content and the URL bar.
   4. Repeat steps 2-3 for `/voice/history`.
 - **Expected result:** Each navigation in the new tab results in the sign-in page.
@@ -154,7 +154,7 @@ This protocol specifies the test cases that, when executed in the non-validated 
   2. In Tab A, perform sign-out per TC-002 / TC-004 (single click on the "Sign out" control).
   3. Without performing any action in Tab B, switch to Tab B and observe its rendered content for up to 30 seconds.
 - **Expected result:** Tab B continues to display the previously-rendered `/voice/history` page, including the analyses table, throughout the observation window. No automatic redirect to the sign-in page is triggered by sign-out in Tab A alone.
-- **Pass criteria:** Tab B's URL remains `https://sambhava.neurapses.dev/voice/history` and the analyses table remains visible throughout a 30-second post-sign-out observation window in which no action is performed in Tab B.
+- **Pass criteria:** Tab B's URL remains `https://test-env.example/voice/history` and the analyses table remains visible throughout a 30-second post-sign-out observation window in which no action is performed in Tab B.
 
 ### TC-013: A stale tab redirects to the sign-in page within 5 seconds of the next user-initiated navigation after sign-out elsewhere
 - **Trace:** AC-FRS-006.2.
@@ -198,15 +198,15 @@ This protocol specifies the test cases that, when executed in the non-validated 
 
 ### TC-017: A captured session cookie returns an unauthenticated response after sign-out
 - **Trace:** AC-FRS-008.1.
-- **Preconditions:** A fresh sign-in is performed in a controlled tab. Before sign-out, the value of the Sambhava session cookie is captured. The captured value is held outside the browser (e.g. in a `curl` command line or a Playwright `request` fixture). The expected cookie name on Sambhava (Laravel) is `laravel_session`; if the actual cookie carrying the session is differently named in the test environment, the tester records the observed name and proceeds with it.
+- **Preconditions:** A fresh sign-in is performed in a controlled tab. Before sign-out, the value of the platform's session cookie is captured. The captured value is held outside the browser (e.g. in a `curl` command line or a Playwright `request` fixture). The expected cookie name on the platform (Laravel) is `laravel_session`; if the actual cookie carrying the session is differently named in the test environment, the tester records the observed name and proceeds with it.
 - **Steps:**
   1. Sign in as the Client test account in a controlled browser session.
-  2. Open DevTools → Application → Cookies → `https://sambhava.neurapses.dev`. Identify and copy the value of the application's session cookie (record only the cookie name and that a value was captured in the execution record — do not record the value itself).
+  2. Open DevTools → Application → Cookies → `https://test-env.example`. Identify and copy the value of the application's session cookie (record only the cookie name and that a value was captured in the execution record — do not record the value itself).
   3. Verify the cookie is currently valid by issuing a request bearing it to a protected endpoint (e.g. `GET /voice/history` via `curl` or Playwright with `Cookie: <name>=<captured-value>`) and confirming a 200 response with workspace HTML. The request shall not follow redirects automatically (`curl -i --no-location`, or Playwright `request` with `maxRedirects: 0`).
   4. In the browser, sign out via the user menu (per TC-002).
   5. After confirming sign-out has completed (sign-in page visible), re-issue the same request from step 3 — same endpoint, same cookie value, no other change, redirects still not followed.
   6. Inspect the HTTP response from step 5 and record observed values in the execution record: the HTTP status code, the `Location` header (if present), and the response body.
-- **Expected result:** The response in step 5 is an unauthenticated response — observed status code is one of 301, 302, 401, or 403; and if a `Location` header is present it resolves to `/login` (absolute or relative); and the response body contains no workspace-data markers (the analysis-history table headers from TC-009, dashboard widget labels, subject names, analysis ids, transcripts, or behavioural scores). On Sambhava (Laravel) the expected shape is 302 with `Location: /login`, but the pass criterion does not depend on a specific status code among the four listed unauthenticated shapes; the tester records what is observed and asserts against the set.
+- **Expected result:** The response in step 5 is an unauthenticated response — observed status code is one of 301, 302, 401, or 403; and if a `Location` header is present it resolves to `/login` (absolute or relative); and the response body contains no workspace-data markers (the analysis-history table headers from TC-009, dashboard widget labels, subject names, analysis ids, transcripts, or behavioural scores). On the platform (Laravel) the expected shape is 302 with `Location: /login`, but the pass criterion does not depend on a specific status code among the four listed unauthenticated shapes; the tester records what is observed and asserts against the set.
 - **Pass criteria:** Observed status code ∈ {301, 302, 401, 403} AND (Location header absent OR resolves to `/login`) AND zero workspace-data markers in the response body.
 
 ### TC-018: Replayed session-cookie response contains no workspace data
@@ -287,7 +287,7 @@ Every AC has ≥ 1 covering TC; no AC is uncovered.
 
 2. **TC-019 audit-event type literal and column names.** The query in TC-019 is parametric on the audit table name, the event-type literal that denotes sign-out, the user-identifier column name, and the event-time column name. The validation lead (or tech lead) must supply these four values to the tester before execution. If they are not available at execution start, TC-019, TC-020, and TC-021 are blocked.
 
-3. **TC-017 cookie name and storage form.** The protocol assumes the application uses a server-side session cookie named `laravel_session` (Sambhava is on Laravel) and that bearing this cookie suffices to authenticate a request. The tester confirms the cookie name at execution and records any deviation. If the application instead requires additional headers (e.g. CSRF token, bearer token), TC-017 and TC-018 must be augmented with the appropriate header capture-and-replay before execution.
+3. **TC-017 cookie name and storage form.** The protocol assumes the application uses a server-side session cookie named `laravel_session` (the application is on Laravel) and that bearing this cookie suffices to authenticate a request. The tester confirms the cookie name at execution and records any deviation. If the application instead requires additional headers (e.g. CSRF token, bearer token), TC-017 and TC-018 must be augmented with the appropriate header capture-and-replay before execution.
 
 ## 6. Notes
 

@@ -22,7 +22,7 @@ traceability:
 
 ## 1. Validation Objective
 
-Demonstrate that the Logout feature of the Sambhava Voice Intelligence platform terminates an authenticated session reliably and consistently from the user's perspective, such that no protected content or authenticated capability remains accessible to the user (or a subsequent user of the same browser) after logout, in support of 21 CFR Part 11 §11.10(d)(e)(g) and EU Annex 11 §12 access-control obligations.
+Demonstrate that the Logout feature of the multi-role web platform terminates an authenticated session reliably and consistently from the user's perspective, such that no protected content or authenticated capability remains accessible to the user (or a subsequent user of the same browser) after logout, in support of 21 CFR Part 11 §11.10(d)(e)(g) and EU Annex 11 §12 access-control obligations.
 
 ## 2. In Scope
 
@@ -108,7 +108,7 @@ Demonstrate that the Logout feature of the Sambhava Voice Intelligence platform 
 
 ## 4. Assumptions
 
-A1. **Sambhava is a GAMP 5 Category 5 custom application** for this validation effort. If the platform is in fact a configured deployment of a third-party product, the depth implied by §2 (notably the server-side and audit-log tests in §2.6 and §2.7) may shift toward supplier-evidence-referencing rather than direct testing.
+A1. **The platform is a GAMP 5 Category 5 custom application** for this validation effort. If the platform is in fact a configured deployment of a third-party product, the depth implied by §2 (notably the server-side and audit-log tests in §2.6 and §2.7) may shift toward supplier-evidence-referencing rather than direct testing.
 
 A2. **The platform falls within 21 CFR Part 11 and/or EU Annex 11 regulated scope** for the client's intended use. The §1 objective and the §2.6, §2.7 depths assume Part 11 §11.10(d)(e)(g) and Annex 11 §12 apply. (Risk Assessment Open Question 2.)
 

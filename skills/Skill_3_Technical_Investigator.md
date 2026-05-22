@@ -269,7 +269,7 @@ Document findings in Code_Investigation_Template.md format
 **Feature:** Admin Logout  
 **Investigation Date:** 2026-02-06  
 **Investigator:** Shyaam (with Claude Code assistance)  
-**Repository:** sambhava-app (local clone)  
+**Repository:** example-app (local clone)  
 **Branch:** main  
 **Commit:** a3f8b92 (latest)
 

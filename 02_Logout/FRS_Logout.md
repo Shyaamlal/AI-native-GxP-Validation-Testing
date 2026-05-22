@@ -11,7 +11,7 @@ ai_assistance:
 human_review:
   reviewer: shyaamlal
   approval_timestamp: 2026-05-18T21:00:13Z
-  comment: "Approved with open-question resolutions consumed by OQ Protocol (Phase 6): Q1 (timing thresholds AC-FRS-002.1, AC-FRS-006.2) accept 5-second default — no documented platform SLA. Q2 (audit timestamp tolerance AC-FRS-009.2) accept ±30-second — server clock authoritative for Sambhava. Q3 (unauthenticated response shape AC-FRS-008.1) — Laravel default is 302 redirect to /login; OQ Protocol shall assert that specifically rather than accepting any of 401/403/redirect. Q4 (audit-record discovery mechanism FRS-009) — DB query via test-env admin access; OQ Protocol to specify the precise query/path."
+  comment: "Approved with open-question resolutions consumed by OQ Protocol (Phase 6): Q1 (timing thresholds AC-FRS-002.1, AC-FRS-006.2) accept 5-second default — no documented platform SLA. Q2 (audit timestamp tolerance AC-FRS-009.2) accept ±30-second — server clock authoritative for the platform. Q3 (unauthenticated response shape AC-FRS-008.1) — Laravel default is 302 redirect to /login; OQ Protocol shall assert that specifically rather than accepting any of 401/403/redirect. Q4 (audit-record discovery mechanism FRS-009) — DB query via test-env admin access; OQ Protocol to specify the precise query/path."
 traceability:
   upstream:
     - URS_Logout.md
@@ -21,7 +21,7 @@ traceability:
 
 ## 1. Purpose
 
-This specification states the functional behaviour the Sambhava Voice Intelligence platform shall provide to satisfy the User Requirements for the Logout feature, with explicit acceptance criteria that the OQ Protocol will translate into executable test cases.
+This specification states the functional behaviour the multi-role web platform shall provide to satisfy the User Requirements for the Logout feature, with explicit acceptance criteria that the OQ Protocol will translate into executable test cases.
 
 ## 2. Functional Requirements
 

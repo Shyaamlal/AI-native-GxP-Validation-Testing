@@ -25,7 +25,7 @@ The conceptual model is V-model traversal — Feature Scoping, Risk Assessment, 
 Before resolving the feature folder or spawning any agent, confirm with the reviewer:
 
 1. **Feature identity.** Restate the feature name as you understood it. Ask:
-   - What system is this feature in? (URL or system identifier — e.g. `sambhava.neurapses.dev`, Veeva Vault sandbox, etc.)
+   - What system is this feature in? (URL or system identifier — e.g. `test-env.example.com`, Veeva Vault sandbox, etc.)
    - Is this a single user-visible feature, or a system area that needs to be scoped into multiple features?
 2. **Existence check.** Ask: *"Does this feature exist in the live system today?"* If **no**, stop. The framework does not generate features that don't yet exist — it scopes and validates features that do. This is not test-driven development. Bring it back when the feature exists.
 3. **Folder confirmation.** If `<feature_folder>/` does not yet exist at repo root, propose the next sequence prefix and ask explicit confirmation before creating. Example: *"I propose creating `03_Report_Generation/` (next available sequence). Confirm to proceed."*
