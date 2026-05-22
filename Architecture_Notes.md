@@ -90,23 +90,43 @@ To pre-empt likely reader assumptions:
 - **Not a Python orchestrator.** The orchestrator is a markdown skill. Python is used only for validators and audit tooling.
 - **Not a workflow engine** (Airflow, Prefect, Temporal). No DAG, no retries, no scheduler. Sequential HITL-gated chain.
 - **Not autonomous.** Every phase has a human gate. The framework's value is the *structure of the human gates*, not removal of humans.
-- **Not production GxP-deployed yet.** Reference implementation tested end-to-end against a live web application (Sambhava test environment). Not running inside a pharma client's validation system.
+- **Not production GxP-deployed yet.** Reference implementation tested end-to-end against a live multi-role web platform in a test environment. Not running inside a pharma client's validation system.
 
 ---
 
-## 4. Known limits (named honestly)
+## 4. Findings from the worked Logout run
 
-Surfaced by the first end-to-end dog-food run on Logout:
+The first end-to-end run of this framework validated the **Logout feature of a non-pharma web application** — classified under GAMP 5 Category 5 as an **access control** with direct 21 CFR Part 11 and EU Annex 11 obligations (full rationale in `02_Logout/Risk_Assessment_Logout.md`).
 
-1. **AI-as-primary-author vs AI-as-assistant** — current flow has AI drafting, human approving. v2 direction: AI proposes structure, human authors content. ADR-007 candidate.
-2. **Single-gate HITL.** Approval comes after the artefact. v2: two-gate (plan-approval before execution, artefact-approval after).
-3. **Validation Scope can over-include integration/security tests** if it doesn't honour Risk Assessment's "reference vs produce" disposition.
-4. **URS / OQ over-decomposition** when atomicity rules are read at observable-contract level instead of user-need level.
-5. **Hallucination cascade through approval comments** — AI-suggested comment templates propagate as confirmed facts downstream. Mitigation: mark suggestions "to be verified."
-6. **Reviewer UX** is flat-file markdown. A web view over markdown + audit log would surface traceability visually.
-7. **state.json** does not yet persist Step 0 inputs (system URL, exec mode); resume re-asks.
-8. **Token tracking** not yet in audit log (per-invocation tokens / cost / model).
-9. **Model selection per phase** — specialists currently inherit orchestrator's model. Should explicitly downshift specialists to Sonnet/Haiku for cost.
+The run completed all eight phases — chain_status: complete, validation_status: Conditional Pass, zero feature defects — and surfaced a set of framework-level findings. The three foregrounded below are the most consequential for anyone designing AI workflows in a regulated context. Three further findings, named more briefly, follow.
+
+### Three findings worth foregrounding
+
+**1. Human ownership of substance — where AI assists vs where humans author.**
+
+The current framework has AI drafting each artefact and the human reviewer approving. Output style varies with the model — Opus 4.7 today, Opus 5 tomorrow, another model next month each produce different decompositions, framing, and voice. The validator's role collapses to "gate." From a regulator's chair this is hard to defend ("Why does your URS look different month-to-month when your validation discipline hasn't changed?"). The v2 direction is to invert authorship: AI proposes structure and traceability, humans author content, diff-based revision becomes the norm rather than approve/reject. The AI Assistance Record then becomes granular — "AI proposed URS-001 through 004; validator authored URS-005 through 007; AI verified traceability." (ADR-007 candidate.)
+
+**2. Pre-execution review — approving the plan, not just the output.**
+
+The current framework has a single HITL gate per phase: the reviewer approves *after* the artefact is produced. In regulated practice, the auditor question is often "who decided what to test?" — answered *before* resources are committed. A two-gate-per-phase HITL pattern would close this: the specialist agent first produces a plan (observation scope, risk dimensions, scope decisions, test cases) with rationale; the validation lead reviews, edits and approves the plan; *then* the agent executes against the approved plan. This applies most directly to Phases 1, 2, 3 and 6 — the phases where the specialist is making choices a reviewer ought to be shaping in advance.
+
+**3. Hallucinations propagating through human review.**
+
+The most easily-missed failure mode the run surfaced. AI suggestions offered to the human during HITL approval — for example, a suggested approval-comment template — propagate as confirmed facts to downstream phases. At Phase 5 approval, the suggested comment included "Laravel default is 302 redirect to /login"; the validator pasted it verbatim; the Phase 6 agent then wrote TC-017 asserting a 302 specifically, when the actual response shape had not been empirically verified (Laravel's unauthenticated response depends on middleware configuration). The amendment at the gate replaced the assertion with an observed-then-asserted set. The human-in-the-loop can be deceptively present when AI is seeding what the human says. Mitigations: approval comments authored by the validator without AI-suggested templates; AI-suggested comments where offered marked "to be verified"; test cases defaulting to "observe shape, then assert" rather than asserting a specific shape that has not been observed.
+
+### Three additional named findings
+
+**4. URS / OQ over-decomposition.** The atomicity rule "one item per row" was read by the URS agent at *observable-contract* level rather than at *user-need* level — producing 11 URS items for a feature where a senior validation lead would produce 4–5. The same root cause cascaded into the OQ Protocol: 1:1 AC-to-TC mapping enforced by the skill produced 21 test cases where one comprehensive test case can often cover multiple related acceptance criteria. Skill-level tuning needed: atomicity defined at user-need level for URS, many-ACs-to-one-TC permitted for OQ where the ACs are practically exercised in the same scenario.
+
+**5. OQ vs integration vs security testing — scope discipline.** The Validation Scope artefact for Logout included server-side session-revocation tests as in-scope OQ test cases (cookie capture + replay, Network panel inspection). The Risk Assessment had correctly designated these as "evidence to reference rather than produce within this chain" — but the Validation Scope skill did not honour that disposition, and the items were promoted to OQ depth. Senior validation judgment caught this at execution time and relocated the test cases. The framework fix is to require the Validation Scope skill to inherit Risk Assessment's "reference vs produce" disposition explicitly. OQ verifies user-facing functional behaviour; backend security assertions belong in security review and are referenced as supporting evidence in the validation package, not re-verified per feature.
+
+**6. Approval-comment propagation behaviour.** Approval comments written by the human reviewer do propagate as context to the next phase's specialist — *when supplied*. At Phase 2 → Phase 3, the reviewer approved without supplying a comment (frontmatter `comment: null`), and the next phase's agent did not inherit any disposition. At Phase 3 → Phase 4 the same mechanism worked correctly when a comment was present. The current behaviour is "propagate if supplied, ignore if null" — which is technically correct but operationally fragile. The orchestrator should prompt the reviewer for a comment at each approval, even if the comment is "approved as-is, no additional disposition."
+
+### Where the other observations live
+
+Implementation-level deferred decisions surfaced by the same run — state.json schema additions (Step 0 inputs persistence), token tracking in the audit log, per-phase model selection (orchestrator on Opus, specialists downshifted to Sonnet/Haiku for cost), and the reviewer-UX gap between flat-file markdown and an integrated traceability view — are recorded in the design document's deferred-decisions register (§11) rather than here, since they are work-in-progress backlog rather than insight from the run.
+
+Per-run open items and conditions for upgrade from Conditional Pass to Pass are documented in `02_Logout/Validation_Summary_Report_Logout.md` §8.
 
 ---
 
