@@ -1,6 +1,6 @@
 # Agentic IT GxP Validation Framework
 
-An agentic framework for IT GxP validation work (computerised systems validation under GxP). A single Orchestrator skill coordinates eight specialist agents — each one phase of a V-model methodology — under Human-in-the-Loop gates and a Python schema-validation layer.
+An agentic framework for IT GxP validation work (computerised systems validation under GxP). A single Orchestrator skill coordinates eight specialist agents: each one phase of a V-model methodology — under Human-in-the-Loop gates and a Python schema-validation layer.
 
 The framework is a reference implementation. It is not enterprise-deployable; the relationship to production GxP requirements is set out in [§2 of the design doc](./00_Project_Context/Agentic_Framework_Design.md).
 
@@ -26,28 +26,11 @@ Production GxP deployment would require formal tool qualification (GAMP 5 Catego
 
 ## Architecture at a glance
 
-The Orchestrator walks the V-model. Feature Scoping, Risk Assessment, and Validation Scope are pre-V bounding activities; the chain then descends the specification arm (URS → FRS), crosses to the OQ phases (OQ Protocol → OQ Execution), and climbs back to the Validation Summary Report. A higher-order Release Summary skill consolidates per-feature summaries for change-request / release rollups.
+The Orchestrator walks an eight-phase V-model under a Human-in-the-Loop (HITL) gate at every phase, with a Python schema validator at each handoff and an append-only audit log capturing every AI invocation and human approval.
 
-```
-                           ┌────────────────────────┐
-                           │     Human Reviewer     │
-                           │  (approves at every    │
-                           │   phase transition)    │
-                           └───────────┬────────────┘
-                                       │ approve / reject
-                                       ▼
-        ┌─────────────────────────────────────────────────────────────┐
-        │              Orchestrator  (validate-feature)               │
-        │   - Spawns specialist agents one phase at a time            │
-        │   - Runs the Python schema validator at each handoff        │
-        │   - Writes an append-only entry to ai_assistance_log.jsonl  │
-        │   - Persists state.json per feature                         │
-        └─┬──────────────┬──────────────┬───────────────┬─────────────┘
-          │              │              │               │
-          ▼              ▼              ▼               ▼
-     Feature       Risk Assessment   ... (eight phases total) ...  Summary
-     Scoping                                                       Report
-```
+![Agentic IT GxP Validation Framework — operational chain, HITL gates, and system components](./docs/architecture-diagram.png)
+
+Feature Scoping, Risk Assessment, and Validation Scope are pre-V bounding activities; the chain then descends the specification arm (URS → FRS), crosses to the OQ phases (OQ Protocol → OQ Execution), and climbs back to the Validation Summary Report. A higher-order Release Summary skill consolidates per-feature summaries for change-request / release rollups.
 
 Agents are bounded by role and by directional isolation (ADR-001) — each specialist reads upstream artifacts only and writes its own artifact only. The Validation Summary Report skill is a declared exception.
 
@@ -169,7 +152,9 @@ This is prospective validation methodology (ADR-004), applied to features as the
 
 `01_Login/` holds artifacts produced under the v1 methodology (retrospective, ten-step, manual prompts in Claude Web). They are retained as a reference for the v1 → v2 transition. See [Appendix A of the design doc](./00_Project_Context/Agentic_Framework_Design.md) for the methodology comparison.
 
-`02_Logout/` holds artifacts produced by the agentic framework end-to-end on 2026-05-18 (chain_status: complete, validation_status: Conditional Pass). The original v1 Logout artifacts have been moved to `02_Logout/_archive/`. The 16-line `ai_assistance_log.jsonl` traces the full chain; `02_Logout/state.json` records the per-phase approvals.
+`02_Logout/` holds artifacts produced by the agentic framework end-to-end on 2026-05-18. The validated feature was the **Logout function of a multi-role web platform**, classified under GAMP 5 Category 5 as an **access control** with direct 21 CFR Part 11 and EU Annex 11 obligations (full rationale in [`02_Logout/Risk_Assessment_Logout.md`](./02_Logout/Risk_Assessment_Logout.md)). The run completed all eight phases — chain_status: complete, validation_status: Conditional Pass, zero feature defects. The 16-line `ai_assistance_log.jsonl` traces the full chain; `02_Logout/state.json` records the per-phase approvals. The original v1 Logout artifacts have been moved to `02_Logout/_archive/`.
+
+The run also surfaced a set of framework-level findings — see [`Architecture_Notes.md` §4](./Architecture_Notes.md#4-findings-from-the-worked-logout-run) for the three foregrounded observations (human ownership of substance; pre-execution review; hallucinations propagating through human review) and the additional findings documented alongside them.
 
 ---
 
