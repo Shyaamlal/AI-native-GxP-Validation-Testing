@@ -158,6 +158,35 @@ The run also surfaced a set of framework-level findings — see [`Architecture_N
 
 ---
 
+## Methodology metrics
+
+The framework already captures the data needed for methodology-performance analysis through the existing audit log. This tool reads that data and surfaces it as metrics — closing the measurement loop without adding new instrumentation.
+
+`tools/methodology_metrics.py` reads `ai_assistance_log.jsonl` and computes methodology-level metrics for a run — wall-clock and per-phase timing, HITL decision distribution, validator pass/fail counts, in-gate amendments (an artifact changed at the human gate and re-validated, tracked via `prior_surfaced_hash`), bottlenecks, and an audit-log integrity scan. It derives everything from the existing log; it does not add instrumentation or estimate missing values.
+
+```bash
+python tools/methodology_metrics.py --feature Logout
+python tools/methodology_metrics.py             # defaults to most recent complete run
+python tools/methodology_metrics.py --json      # machine-readable output
+```
+
+Sample output against the Logout run:
+
+| Phase | Name | Duration | Schema | HITL | In-gate amendments |
+|---|---|---|---|---|---|
+| 1 | feature-scoping | 1m 45s | pass:2 | approved:1 | 0 |
+| 2 | risk-assessment | 6h 48m 28s | pass:2 | approved:1 | 0 |
+| 3 | validation-scope | 4m 31s | pass:2 | approved:1 | 0 |
+| 4 | urs | -22s | pass:2 | approved:1 | 0 |
+| 5 | frs | 2m 13s | pass:2 | approved:1 | 0 |
+| 6 | oq-protocol | 8m 25s | pass:2 | approved:1 | 1 |
+| 7 | oq-execution | 14m 41s | pass:2 | approved:1 | 0 |
+| 8 | summary-report | 1m 37s | pass:2 | approved:1 | 0 |
+
+The metrics surfaced framework-level findings from the Logout run — including an audit-log integrity anomaly and two instrumentation gaps. These are documented in [`Architecture_Notes.md §4`](./Architecture_Notes.md#4-findings-from-the-worked-logout-run).
+
+---
+
 ## Smoke-testing the validators
 
 ```bash
